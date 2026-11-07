@@ -1,0 +1,37 @@
+# Ambientes virtuais
+.venv/
+venv/
+env/
+ENV/
+
+# Bytecode e cache do Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Configurações de IDEs (PyCharm / IntelliJ / VS Code)
+.idea/
+*.iml
+.vscode/
+
+# Pastas de compilação e distribuição (PyInstaller / Py-build)
+build/
+dist/
+out/
+*.manifest
+*.spec.bak
+
+# Logs, cache e ficheiros temporários do utilizador
+*.log
+data/app.log
+data/cache/
+data/history.json
+data/settings.json
+ui/temp_target.jpg
+
+# Ficheiros de ambiente e credenciais
+.env
+*.pem
+serviceAccountKey.json
+*.key

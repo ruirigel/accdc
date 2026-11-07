@@ -1,0 +1,54 @@
+{
+    "ccds": [
+        {
+            "name": "Apogee AP4",
+            "pixel_x": "9.0",
+            "pixel_y": "9.0",
+            "width": "2048",
+            "height": "2048"
+        },
+        {
+            "name": "Apogee AP8p",
+            "pixel_x": "24.0",
+            "pixel_y": "24.0",
+            "width": "1024",
+            "height": "1024"
+        },
+        {
+            "name": "Alta U1",
+            "pixel_x": "9.0",
+            "pixel_y": "9.0",
+            "width": "768",
+            "height": "768"
+        },
+        {
+            "name": "Atik 314L Plus",
+            "pixel_x": "6.45",
+            "pixel_y": "6.45",
+            "width": "1392",
+            "height": "1040"
+        }
+    ],
+    "telescopes": [
+        {
+            "name": "Sky-Watcher - Equinox 80 Pro",
+            "focal": "500",
+            "aperture": "80"
+        },
+        {
+            "name": "10-inch SCT f/10",
+            "focal": "2500",
+            "aperture": "250"
+        },
+        {
+            "name": "11-inch SCT f/10",
+            "focal": "2800",
+            "aperture": "280"
+        },
+        {
+            "name": "12-inch SCT f/10",
+            "focal": "3000",
+            "aperture": "300"
+        }
+    ]
+}
