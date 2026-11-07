@@ -28,9 +28,9 @@ Beyond optical formulas, Accdc queries astronomical databases (SIMBAD / NED via 
 ## ✨ Features
 
 - **Real-Time Optical Calculations:**
-  - Image Scale in arcseconds per pixel ($\text{arcsec/px}$).
-  - Field of View ($\text{FOV}$) in arcminutes ($'$) and degrees ($^\circ$).
-  - Telescope focal ratio ($f/\#$).
+  - Image Scale in arcseconds per pixel.
+  - Field of View in arcminutes and degrees.
+  - Telescope focal ratio.
 - **Interactive FOV Sky Visualizer:**
   - Automatic download and caching of DSS sky survey images for any celestial target.
   - Interactive sensor rectangle overlay rendered accurately to scale.
