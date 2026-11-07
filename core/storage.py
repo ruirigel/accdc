@@ -17,6 +17,21 @@ def obter_caminho_dados(nome_ficheiro):
         os.makedirs(pasta_data)
     return os.path.join(pasta_data, nome_ficheiro)
 
+def obter_caminho_asset(nome_ficheiro):
+    """Retorna o caminho absoluto para ficheiros na pasta assets/ (compatível com dev e PyInstaller)."""
+    if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
+        caminho_bundle = os.path.join(sys._MEIPASS, "assets", nome_ficheiro)
+        if os.path.exists(caminho_bundle):
+            return caminho_bundle
+    base_dir = obter_caminho_base()
+    caminho = os.path.join(base_dir, "assets", nome_ficheiro)
+    if os.path.exists(caminho):
+        return caminho
+    caminho_alt = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "assets", nome_ficheiro)
+    if os.path.exists(caminho_alt):
+        return caminho_alt
+    return os.path.join("assets", nome_ficheiro)
+
 class TeeStream:
     """Duplica o stdout/stderr para a consola e para o ficheiro de log (app.log) com data e hora."""
     def __init__(self, filename):

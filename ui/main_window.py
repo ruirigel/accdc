@@ -10,14 +10,15 @@ from PySide6.QtWidgets import (
     QTableWidgetItem, QHeaderView, QMessageBox, QSizePolicy, QMenu, QProgressBar, QCompleter
 )
 from PySide6.QtCore import Qt, QThread, Signal, QTimer, QLocale, QRegularExpression
-from PySide6.QtGui import QPixmap, QImage, QStandardItemModel, QRegularExpressionValidator
+from PySide6.QtGui import QIcon, QPixmap, QImage, QStandardItemModel, QRegularExpressionValidator
 
 from core.calculator import calculate_image_scale, calculate_fov, calculate_focal_ratio
 from core.query import query_target_coordinates, fetch_target_image
 from core.storage import (
     carregar_instrumentos, guardar_instrumentos,
     carregar_historico, guardar_historico,
-    carregar_settings, guardar_settings, setup_logging
+    carregar_settings, guardar_settings, setup_logging,
+    obter_caminho_asset
 )
 from core.firebase_sync import (
     enviar_registo_network, carregar_registos_network,
@@ -300,6 +301,10 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle(f"Accdc - Astronomy CCD Calculator (v{APP_VERSION})")
+        logo_path = obter_caminho_asset("logo.png")
+        if os.path.exists(logo_path):
+            self.setWindowIcon(QIcon(logo_path))
+
         self.resize(1300, 700)
         self.setMinimumSize(800, 550)
 
@@ -1623,11 +1628,37 @@ class MainWindow(QMainWindow):
         about_group = QGroupBox("About Accdc (Astronomy CCD Calculator)")
         about_layout = QVBoxLayout(about_group)
 
+        # Header com Logo da aplicação e Título/Versão
+        header_layout = QHBoxLayout()
+        logo_path = obter_caminho_asset("logo.png")
+        if os.path.exists(logo_path):
+            lbl_logo = QLabel()
+            pixmap = QPixmap(logo_path).scaled(
+                72, 72,
+                Qt.AspectRatioMode.KeepAspectRatio,
+                Qt.TransformationMode.SmoothTransformation
+            )
+            lbl_logo.setPixmap(pixmap)
+            lbl_logo.setFixedSize(72, 72)
+            lbl_logo.setAlignment(Qt.AlignmentFlag.AlignCenter)
+            header_layout.addWidget(lbl_logo)
+            header_layout.addSpacing(16)
+
+        title_layout = QVBoxLayout()
         lbl_titulo = QLabel("<b>Accdc - Astronomy CCD Calculator</b>")
-        lbl_titulo.setStyleSheet("font-size: 16px; color: #ffffff;")
+        lbl_titulo.setStyleSheet("font-size: 17px; color: #ffffff;")
 
         lbl_versao = QLabel(f"Version: {APP_VERSION}")
-        lbl_versao.setStyleSheet("color: #bbbbbb; font-weight: bold;")
+        lbl_versao.setStyleSheet("color: #4da6ff; font-weight: bold; font-size: 13px;")
+
+        title_layout.addWidget(lbl_titulo)
+        title_layout.addWidget(lbl_versao)
+        title_layout.addStretch()
+
+        header_layout.addLayout(title_layout)
+        header_layout.addStretch()
+
+        about_layout.addLayout(header_layout)
 
         lbl_descricao = QLabel(
             "<b>Accdc</b> is an advanced tool for optical calculation, Field of View (FOV) simulation, "
@@ -1635,7 +1666,7 @@ class MainWindow(QMainWindow):
             "amateur and professional astronomers in planning astrophotography sessions."
         )
         lbl_descricao.setWordWrap(True)
-        lbl_descricao.setStyleSheet("color: #dddddd; margin-top: 10px;")
+        lbl_descricao.setStyleSheet("color: #dddddd; margin-top: 12px; line-height: 1.4;")
 
         lbl_tech = QLabel(
             "<b>Technologies Used:</b><br>"
@@ -1647,8 +1678,6 @@ class MainWindow(QMainWindow):
         lbl_tech.setWordWrap(True)
         lbl_tech.setStyleSheet("color: #cccccc; margin-top: 15px;")
 
-        about_layout.addWidget(lbl_titulo)
-        about_layout.addWidget(lbl_versao)
         about_layout.addWidget(lbl_descricao)
         about_layout.addWidget(lbl_tech)
         about_layout.addStretch()
@@ -1685,7 +1714,18 @@ class MainWindow(QMainWindow):
 
 if __name__ == "__main__":
     setup_logging()
+    # Assegurar identificador único de app no Windows para exibir o ícone correto na barra de tarefas
+    try:
+        import ctypes
+        ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID("ruirigel.accdc.calculator")
+    except Exception:
+        pass
+
     app = QApplication(sys.argv)
+    logo_path = obter_caminho_asset("logo.png")
+    if os.path.exists(logo_path):
+        app.setWindowIcon(QIcon(logo_path))
+
     window = MainWindow()
     window.show()
     sys.exit(app.exec())

@@ -8,6 +8,7 @@ tmp_ret = collect_all('core')
 datas += tmp_ret[0]; binaries += tmp_ret[1]; hiddenimports += tmp_ret[2]
 tmp_ret = collect_all('ui')
 datas += tmp_ret[0]; binaries += tmp_ret[1]; hiddenimports += tmp_ret[2]
+datas += [('assets', 'assets'), ('data/instruments.json', 'data')]
 
 
 a = Analysis(
