@@ -42,7 +42,7 @@ def verificar_status_survey(timeout=4):
 def enviar_registo_network(user_name, country, target, ra, dec, telescope, focal, ccd, pixel_size):
     """Envia um novo registo de pesquisa para o Firebase na aba Network."""
     if not FIREBASE_URL or "exemplo" in FIREBASE_URL:
-        logging.warning("[FIREBASE] URL inválido ou não configurado.")
+        print("[FIREBASE WARNING] Firebase URL is invalid or not configured.")
         return False
 
     base_url = FIREBASE_URL.rstrip('/')
@@ -72,19 +72,20 @@ def enviar_registo_network(user_name, country, target, ra, dec, telescope, focal
             method='POST'
         )
         with urllib.request.urlopen(req, timeout=5) as response:
-            logging.info(f"[FIREBASE ENVIAR SUCCESS] Código HTTP: {response.status}")
+            print(f"[FIREBASE SEND SUCCESS] HTTP Status: {response.status}")
             return response.status in (200, 201)
     except urllib.error.HTTPError as e:
-        logging.error(f"[FIREBASE ERRO HTTP ENVIAR] Código: {e.code} | Razão: {e.reason}")
+        print(f"[FIREBASE HTTP SEND ERROR] Code: {e.code} | Reason: {e.reason}")
     except urllib.error.URLError as e:
-        logging.error(f"[FIREBASE ERRO REDE ENVIAR] {e.reason}")
+        print(f"[FIREBASE NETWORK SEND ERROR] {e.reason}")
     except Exception as e:
-        logging.error(f"[FIREBASE ERRO GERAL ENVIAR] {e}")
+        print(f"[FIREBASE GENERAL SEND ERROR] {e}")
     return False
 
 def carregar_registos_network():
     """Obtém todos os registos partilhados da rede a partir do Firebase e limpa os antigos se passar de 400."""
     if not FIREBASE_URL or "exemplo" in FIREBASE_URL:
+        print("[FIREBASE WARNING] Firebase URL is invalid or not configured.")
         return []
 
     base_url = FIREBASE_URL.rstrip('/')
@@ -110,9 +111,9 @@ def carregar_registos_network():
                                 urllib.request.urlopen(del_req, timeout=3)
                                 data.pop(chave, None)
                             except Exception as ex:
-                                logging.error(f"[FIREBASE PRUNE ERROR] Falha ao apagar registo antigo {chave}: {ex}")
+                                print(f"[FIREBASE PRUNE ERROR] Failed to delete old record {chave}: {ex}")
 
-                        logging.info(f"[FIREBASE PRUNE] Limpeza efetuada com sucesso: {len(chaves_a_apagar)} entradas antigas removidas da base de dados.")
+                        print(f"[FIREBASE PRUNE] Cleanup completed successfully: {len(chaves_a_apagar)} old entries removed from database.")
 
                     lista = []
                     for key, val in data.items():
@@ -120,7 +121,7 @@ def carregar_registos_network():
                             lista.append(val)
                     return lista
     except urllib.error.HTTPError as e:
-        logging.error(f"[FIREBASE ERRO HTTP LER] Código: {e.code} | Permissão Negada ou Regra do Firebase bloqueando.")
+        print(f"[FIREBASE HTTP READ ERROR] Code: {e.code} | Permission Denied or Firebase Rule blocking.")
     except Exception as e:
-        logging.error(f"[FIREBASE ERRO LER] {e}")
+        print(f"[FIREBASE READ ERROR] {e}")
     return []

@@ -84,8 +84,8 @@ def carregar_instrumentos():
         try:
             with open(caminho, 'r', encoding='utf-8') as f:
                 return json.load(f)
-        except Exception:
-            pass
+        except Exception as e:
+            print(f"[ERROR LOADING INSTRUMENTS] {e}")
     return {
         "ccds": [{"name": "Custom Camera", "pixel_x": "6.45", "pixel_y": "6.45", "width": "1392", "height": "1040"}],
         "telescopes": [{"name": "Custom Telescope", "focal": "500", "aperture": "80"}]
@@ -110,8 +110,8 @@ def carregar_historico():
         try:
             with open(caminho, 'r', encoding='utf-8') as f:
                 return json.load(f)
-        except Exception:
-            pass
+        except Exception as e:
+            print(f"[ERROR LOADING HISTORY] {e}")
     return []
 
 def guardar_historico(historico_lista):
@@ -132,8 +132,8 @@ def carregar_settings():
         try:
             with open(caminho, 'r', encoding='utf-8') as f:
                 return json.load(f)
-        except Exception:
-            pass
+        except Exception as e:
+            print(f"[ERROR LOADING SETTINGS] {e}")
     return {
         "user_name": "rui",
         "user_country": "pt",

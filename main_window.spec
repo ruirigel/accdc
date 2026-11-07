@@ -1,14 +1,13 @@
 # -*- mode: python ; coding: utf-8 -*-
 from PyInstaller.utils.hooks import collect_all
 
-datas = []
+datas = [('assets', 'assets'), ('data/*.dat', 'data'), ('data/instruments.json', 'data')]
 binaries = []
 hiddenimports = []
 tmp_ret = collect_all('core')
 datas += tmp_ret[0]; binaries += tmp_ret[1]; hiddenimports += tmp_ret[2]
 tmp_ret = collect_all('ui')
 datas += tmp_ret[0]; binaries += tmp_ret[1]; hiddenimports += tmp_ret[2]
-datas += [('assets', 'assets'), ('data/instruments.json', 'data')]
 
 
 a = Analysis(

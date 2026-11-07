@@ -13,7 +13,10 @@ from PySide6.QtCore import Qt, QThread, Signal, QTimer, QLocale, QRegularExpress
 from PySide6.QtGui import QIcon, QPixmap, QImage, QStandardItemModel, QRegularExpressionValidator
 
 from core.calculator import calculate_image_scale, calculate_fov, calculate_focal_ratio
-from core.query import query_target_coordinates, fetch_target_image
+from core.query import (
+    query_target_coordinates, fetch_target_image,
+    obter_todos_objetos_dat
+)
 from core.storage import (
     carregar_instrumentos, guardar_instrumentos,
     carregar_historico, guardar_historico,
@@ -324,6 +327,9 @@ class MainWindow(QMainWindow):
         self.is_rendering = False
         self.render_pending = False
 
+        # Carregar catálogo .dat localmente
+        self.catalogos_locais_dat = obter_todos_objetos_dat()
+
         status_bar = self.statusBar()
         status_bar.setStyleSheet("""
             QStatusBar {
@@ -395,6 +401,7 @@ class MainWindow(QMainWindow):
         self._pending_zoom_ratio = None
 
         self.init_panel_tab()
+        self.init_catalogs_tab()
         self.init_historic_tab()
         self.init_network_tab()
         self.init_instruments_tab()
@@ -546,21 +553,24 @@ class MainWindow(QMainWindow):
         self.input_target.setValidator(validator)
         self.input_target.textChanged.connect(lambda text: self.input_target.setText(text.upper()))
 
-        # QCompleter dinâmico com milhares de objetos gerados localmente (Messier, NGC, IC e Estrelas)
+        # QCompleter dinâmico enriquecido com dados lidos dos ficheiros .dat
         lista_sugestoes = []
+        for cat_key, itens in self.catalogos_locais_dat.items():
+            for item in itens:
+                lista_sugestoes.append(item["name"])
+
+        # Fallback de itens standard caso não haja .dat carregados
         lista_sugestoes.extend([f"M{i}" for i in range(1, 111)])
-        lista_sugestoes.extend([f"NGC{i}" for i in range(1, 7841)])
-        lista_sugestoes.extend([f"IC{i}" for i in range(1, 5385)])
+        lista_sugestoes.extend([f"NGC{i}" for i in range(1, 1000)])
+        lista_sugestoes.extend([f"IC{i}" for i in range(1, 1000)])
         estrelas_e_especiais = [
             "Sirius", "Vega", "Betelgeuse", "Rigel", "Polaris", "Antares", "Arcturus",
             "Procyon", "Achernar", "Capella", "Altair", "Aldebaran", "Spica", "Pollux",
-            "Fomalhaut", "Deneb", "Regulus", "Adhara", "Castor", "Gacrux", "Shaula",
-            "Bellatrix", "Elnath", "Miaplacidus", "Alnilam", "Alnitak", "Saiph",
-            "Barnard 33", "C 14", "C 20"
+            "Fomalhaut", "Deneb", "Regulus", "Adhara", "Castor", "Gacrux", "Shaula"
         ]
         lista_sugestoes.extend(estrelas_e_especiais)
 
-        completer = QCompleter(lista_sugestoes, self)
+        completer = QCompleter(sorted(list(set(lista_sugestoes))), self)
         completer.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)
         completer.setCompletionMode(QCompleter.CompletionMode.PopupCompletion)
         completer.setFilterMode(Qt.MatchFlag.MatchStartsWith)
@@ -1156,6 +1166,74 @@ class MainWindow(QMainWindow):
         if self.render_pending:
             self.render_timer.start()
 
+    def init_catalogs_tab(self):
+        tab = QWidget()
+        main_layout = QVBoxLayout(tab)
+        grid_catalogs = QGridLayout()
+
+        # Mapeamento dinâmico baseado nos ficheiros .dat da pasta data/
+        mapeamento_ficheiros = [
+            ("BARNARD", "Barnard"),
+            ("BSL", "Bright Stars"),
+            ("CALDWELL", "Caldwell"),
+            ("GPO", "Galactic Planetary Objects"),
+            ("IC", "IC"),
+            ("LBN", "Lynds Bright Nebulae"),
+            ("LDN", "Lynds Dark Nebulae"),
+            ("MESSIER", "Messier"),
+            ("NGC", "NGC"),
+            ("SAO", "SAO"),
+            ("SCHIIR", "Sharpless Catalogue of HII Regions"),
+            ("WDSD", "Washington Double Stars")
+        ]
+
+        for idx, (chave_dat, nome_exibicao) in enumerate(mapeamento_ficheiros):
+            linha = idx // 2
+            coluna = idx % 2
+            grupo_box = QVBoxLayout()
+            combo = QComboBox()
+
+            itens_combo = [nome_exibicao]
+            if chave_dat in self.catalogos_locais_dat:
+                for obj in self.catalogos_locais_dat[chave_dat]:
+                    itens_combo.append(obj["name"])
+            else:
+                itens_combo.append("Select an object...")
+
+            combo.addItems(itens_combo)
+
+            model = combo.model()
+            if isinstance(model, QStandardItemModel):
+                first_item = model.item(0)
+                if first_item:
+                    first_item.setEnabled(False)
+                    first_item.setForeground(Qt.GlobalColor.gray)
+
+            combo.currentIndexChanged.connect(lambda index, c=nome_exibicao, cb=combo: self.selecionar_alvo_catalogo(c, cb, index))
+            grupo_box.addWidget(combo)
+            grid_catalogs.addLayout(grupo_box, linha, coluna)
+
+        main_layout.addLayout(grid_catalogs)
+        main_layout.addStretch()
+
+        self.tabs.addTab(tab, "Catalogs")
+
+    def selecionar_alvo_catalogo(self, catalogo, combo, index):
+        if index <= 0:
+            return
+        valor = combo.currentText()
+        if "Select" in valor:
+            return
+
+        alvo_id = valor.split(" ")[0]
+        self.input_target.setText(alvo_id)
+        self.tabs.setCurrentIndex(0)
+
+        combo.blockSignals(True)
+        combo.setCurrentIndex(0)
+        combo.blockSignals(False)
+
+        print(f"[TERMINAL LOG] Catalog '{catalogo}' selected: {alvo_id} -> Redirected to Panel")
 
     def init_historic_tab(self):
         tab = QWidget()
@@ -1190,16 +1268,6 @@ class MainWindow(QMainWindow):
             self.table_historic.setItem(row_idx, 7, QTableWidgetItem(item.get("pixel_x", "")))
             self.table_historic.setItem(row_idx, 8, QTableWidgetItem(item.get("pixel_y", "")))
 
-        note_group = QGroupBox()
-        note_layout = QVBoxLayout(note_group)
-        note_label = QLabel(
-            "Note:\nHere you will see all your searches done in the past. You have the ability to double-click to review "
-            "the target with all parameters again and get basic info about the target."
-        )
-        note_label.setStyleSheet("color: #aaaaaa; font-style: italic;")
-        note_layout.addWidget(note_label)
-        main_layout.addWidget(note_group)
-
         self.tabs.addTab(tab, "Historic")
 
     def init_network_tab(self):
@@ -1221,17 +1289,6 @@ class MainWindow(QMainWindow):
 
         main_layout.addWidget(self.table_network)
         self.atualizar_tabela_network()
-
-        note_group = QGroupBox()
-        note_layout = QVBoxLayout(note_group)
-        note_label = QLabel(
-            "Note:\nHere you will see all your searches in the network coming from you and all users in real time. "
-            "You have the ability to double-click to review the target with all parameters again, and can get hardware items of a user "
-            "to add to your database. Take advantage of research shared by other users."
-        )
-        note_label.setStyleSheet("color: #aaaaaa; font-style: italic;")
-        note_layout.addWidget(note_label)
-        main_layout.addWidget(note_group)
 
         self.tabs.addTab(tab, "Network")
 
@@ -1436,13 +1493,6 @@ class MainWindow(QMainWindow):
         self.btn_up_tel.clicked.connect(lambda: self.move_row(self.table_tel, -1))
         self.btn_down_tel.clicked.connect(lambda: self.move_row(self.table_tel, 1))
 
-        note_group = QGroupBox()
-        note_layout = QVBoxLayout(note_group)
-        note_label = QLabel("Note:\nHere you can manage your astronomical setup. Click '➕' to add a row, double-click to edit, and click '💾' to save changes permanently.")
-        note_label.setStyleSheet("color: #aaaaaa; font-style: italic;")
-        note_layout.addWidget(note_label)
-        main_layout.addWidget(note_group)
-
         self.tabs.addTab(tab, "Instruments")
 
     @staticmethod
@@ -1609,16 +1659,6 @@ class MainWindow(QMainWindow):
         main_layout.addWidget(btn_save_settings)
         main_layout.addStretch()
 
-        note_group = QGroupBox()
-        note_layout = QVBoxLayout(note_group)
-        note_label = QLabel(
-            "Note:\nConfigure your ASCOM telescope connection parameters here to enable direct 'Slew' to target coordinates, "
-            "as well as your username and country info for global sharing in the Network tab."
-        )
-        note_label.setStyleSheet("color: #aaaaaa; font-style: italic;")
-        note_layout.addWidget(note_label)
-        main_layout.addWidget(note_group)
-
         self.tabs.addTab(tab, "Settings")
 
     def init_about_tab(self):
@@ -1628,7 +1668,6 @@ class MainWindow(QMainWindow):
         about_group = QGroupBox("About Accdc (Astronomy CCD Calculator)")
         about_layout = QVBoxLayout(about_group)
 
-        # Header com Logo da aplicação e Título/Versão
         header_layout = QHBoxLayout()
         logo_path = obter_caminho_asset("logo.png")
         if os.path.exists(logo_path):
@@ -1685,15 +1724,6 @@ class MainWindow(QMainWindow):
         main_layout.addWidget(about_group)
         main_layout.addStretch()
 
-        note_group = QGroupBox()
-        note_layout = QVBoxLayout(note_group)
-        note_label = QLabel(
-            "Note:\nDesigned for high-precision field calculations and astronomical observation coordination."
-        )
-        note_label.setStyleSheet("color: #aaaaaa; font-style: italic;")
-        note_layout.addWidget(note_label)
-        main_layout.addWidget(note_group)
-
         self.tabs.addTab(tab, "About")
 
     def salvar_configuracoes_settings(self):
@@ -1714,7 +1744,6 @@ class MainWindow(QMainWindow):
 
 if __name__ == "__main__":
     setup_logging()
-    # Assegurar identificador único de app no Windows para exibir o ícone correto na barra de tarefas
     try:
         import ctypes
         ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID("ruirigel.accdc.calculator")

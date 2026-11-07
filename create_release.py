@@ -20,7 +20,7 @@ def create_release(version_str=None):
 
     # Validar formato YYYYMMDD
     if not re.match(r"^\d{8}$", version_str):
-        print(f"Erro: O formato de versão deve ser YYYYMMDD (ex: 20261105). Recebido: {version_str}")
+        print(f"Error: Version format must be YYYYMMDD (e.g., 20261105). Received: {version_str}")
         sys.exit(1)
 
     conteudo = f'''"""
@@ -35,9 +35,9 @@ __version__ = VERSION
     with open(VERSION_FILE, "w", encoding="utf-8", newline="\n") as f:
         f.write(conteudo)
 
-    print(f"[RELEASE CRIADA COM SUCESSO] Versão atualizada para: {version_str}")
-    print(f"-> Ficheiro atualizado: {VERSION_FILE}")
-    print("-> A aba About e a janela principal refletem automaticamente esta versão.")
+    print(f"[RELEASE CREATED SUCCESSFULLY] Version updated to: {version_str}")
+    print(f"-> File updated: {VERSION_FILE}")
+    print("-> About tab and main window now automatically reflect this version.")
 
 if __name__ == "__main__":
     v = sys.argv[1] if len(sys.argv) > 1 else None
