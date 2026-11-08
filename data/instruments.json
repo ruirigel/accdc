@@ -1,11 +1,60 @@
 {
     "ccds": [
         {
+            "name": "Apogee AP1E",
+            "pixel_x": "9.0",
+            "pixel_y": "9.0",
+            "width": "768",
+            "height": "512"
+        },
+        {
+            "name": "Apogee AP2E",
+            "pixel_x": "9.0",
+            "pixel_y": "9.0",
+            "width": "1536",
+            "height": "1024"
+        },
+        {
+            "name": "Apogee AP260E",
+            "pixel_x": "20.0",
+            "pixel_y": "20.0",
+            "width": "512",
+            "height": "512"
+        },
+        {
+            "name": "Apogee AP32ME",
+            "pixel_x": "6.8",
+            "pixel_y": "6.8",
+            "width": "2184",
+            "height": "1472"
+        },
+        {
             "name": "Apogee AP4",
             "pixel_x": "9.0",
             "pixel_y": "9.0",
             "width": "2048",
             "height": "2048"
+        },
+        {
+            "name": "Apogee AP47p",
+            "pixel_x": "13.0",
+            "pixel_y": "13.0",
+            "width": "1024",
+            "height": "1024"
+        },
+        {
+            "name": "Apogee AP6E",
+            "pixel_x": "24.0",
+            "pixel_y": "24.0",
+            "width": "1024",
+            "height": "1024"
+        },
+        {
+            "name": "Apogee AP7ap",
+            "pixel_x": "24.0",
+            "pixel_y": "24.0",
+            "width": "512",
+            "height": "512"
         },
         {
             "name": "Apogee AP8p",
@@ -15,11 +64,844 @@
             "height": "1024"
         },
         {
+            "name": "Apogee AP9E",
+            "pixel_x": "9.0",
+            "pixel_y": "9.0",
+            "width": "3072",
+            "height": "2048"
+        },
+        {
+            "name": "Apogee AP10",
+            "pixel_x": "14.0",
+            "pixel_y": "14.0",
+            "width": "2048",
+            "height": "2048"
+        },
+        {
+            "name": "Apogee AP16E",
+            "pixel_x": "9.0",
+            "pixel_y": "9.0",
+            "width": "4096",
+            "height": "4096"
+        },
+        {
+            "name": "Apogee KX85",
+            "pixel_x": "6.7",
+            "pixel_y": "6.7",
+            "width": "1300",
+            "height": "1024"
+        },
+        {
+            "name": "Apogee KX260",
+            "pixel_x": "20.0",
+            "pixel_y": "20.0",
+            "width": "512",
+            "height": "512"
+        },
+        {
+            "name": "Apogee AP360",
+            "pixel_x": "20.0",
+            "pixel_y": "20.0",
+            "width": "512",
+            "height": "512"
+        },
+        {
             "name": "Alta U1",
             "pixel_x": "9.0",
             "pixel_y": "9.0",
             "width": "768",
-            "height": "768"
+            "height": "512"
+        },
+        {
+            "name": "Alta U2",
+            "pixel_x": "9.0",
+            "pixel_y": "9.0",
+            "width": "1536",
+            "height": "1024"
+        },
+        {
+            "name": "Alta U4",
+            "pixel_x": "9.0",
+            "pixel_y": "9.0",
+            "width": "2048",
+            "height": "2048"
+        },
+        {
+            "name": "Alta U6",
+            "pixel_x": "24.0",
+            "pixel_y": "24.0",
+            "width": "1024",
+            "height": "1024"
+        },
+        {
+            "name": "Alta U9",
+            "pixel_x": "9.0",
+            "pixel_y": "9.0",
+            "width": "3072",
+            "height": "2048"
+        },
+        {
+            "name": "Alta U10",
+            "pixel_x": "14.0",
+            "pixel_y": "14.0",
+            "width": "2048",
+            "height": "2048"
+        },
+        {
+            "name": "Alta U13",
+            "pixel_x": "16.0",
+            "pixel_y": "16.0",
+            "width": "1280",
+            "height": "1024"
+        },
+        {
+            "name": "Alta U16",
+            "pixel_x": "9.0",
+            "pixel_y": "9.0",
+            "width": "4096",
+            "height": "4096"
+        },
+        {
+            "name": "Alta U32",
+            "pixel_x": "6.8",
+            "pixel_y": "6.8",
+            "width": "2184",
+            "height": "1472"
+        },
+        {
+            "name": "Alta U260",
+            "pixel_x": "20.0",
+            "pixel_y": "20.0",
+            "width": "512",
+            "height": "512"
+        },
+        {
+            "name": "Alta U30",
+            "pixel_x": "26.0",
+            "pixel_y": "26.0",
+            "width": "1024",
+            "height": "256"
+        },
+        {
+            "name": "Alta U42",
+            "pixel_x": "13.5",
+            "pixel_y": "13.5",
+            "width": "2048",
+            "height": "2048"
+        },
+        {
+            "name": "Alta U42UV",
+            "pixel_x": "13.5",
+            "pixel_y": "13.5",
+            "width": "2048",
+            "height": "2048"
+        },
+        {
+            "name": "Alta U47",
+            "pixel_x": "13.0",
+            "pixel_y": "13.0",
+            "width": "1024",
+            "height": "1024"
+        },
+        {
+            "name": "Alta U47-20",
+            "pixel_x": "13.0",
+            "pixel_y": "13.0",
+            "width": "1024",
+            "height": "2048"
+        },
+        {
+            "name": "Alta U55",
+            "pixel_x": "22.5",
+            "pixel_y": "22.5",
+            "width": "1152",
+            "height": "770"
+        },
+        {
+            "name": "Alta U57",
+            "pixel_x": "13.0",
+            "pixel_y": "13.0",
+            "width": "512",
+            "height": "1024"
+        },
+        {
+            "name": "Alta U57+UV",
+            "pixel_x": "13.0",
+            "pixel_y": "13.0",
+            "width": "512",
+            "height": "512"
+        },
+        {
+            "name": "Alta U77+",
+            "pixel_x": "13.0",
+            "pixel_y": "13.0",
+            "width": "512",
+            "height": "512"
+        },
+        {
+            "name": "Alta U2000",
+            "pixel_x": "7.4",
+            "pixel_y": "7.4",
+            "width": "1600",
+            "height": "1200"
+        },
+        {
+            "name": "Alta U2000C",
+            "pixel_x": "7.4",
+            "pixel_y": "7.4",
+            "width": "1600",
+            "height": "1200"
+        },
+        {
+            "name": "Alta U4000",
+            "pixel_x": "7.4",
+            "pixel_y": "7.4",
+            "width": "2048",
+            "height": "2048"
+        },
+        {
+            "name": "Alta U7",
+            "pixel_x": "24.0",
+            "pixel_y": "24.0",
+            "width": "512",
+            "height": "512"
+        },
+        {
+            "name": "Alta U8",
+            "pixel_x": "24.0",
+            "pixel_y": "24.0",
+            "width": "1024",
+            "height": "1024"
+        },
+        {
+            "name": "ATK-16",
+            "pixel_x": "8.6",
+            "pixel_y": "8.3",
+            "width": "752",
+            "height": "582"
+        },
+        {
+            "name": "ATK-16IC",
+            "pixel_x": "7.4",
+            "pixel_y": "7.4",
+            "width": "659",
+            "height": "494"
+        },
+        {
+            "name": "ATK-16IC-S",
+            "pixel_x": "8.6",
+            "pixel_y": "8.3",
+            "width": "752",
+            "height": "582"
+        },
+        {
+            "name": "ATK-16HR",
+            "pixel_x": "6.45",
+            "pixel_y": "6.45",
+            "width": "1392",
+            "height": "1040"
+        },
+        {
+            "name": "ATK-16HRC",
+            "pixel_x": "6.45",
+            "pixel_y": "6.45",
+            "width": "1392",
+            "height": "1040"
+        },
+        {
+            "name": "ATK-314E",
+            "pixel_x": "4.65",
+            "pixel_y": "4.65",
+            "width": "1392",
+            "height": "1040"
+        },
+        {
+            "name": "ATK-314L",
+            "pixel_x": "6.45",
+            "pixel_y": "6.45",
+            "width": "1392",
+            "height": "1040"
+        },
+        {
+            "name": "Canon 20Da",
+            "pixel_x": "6.4",
+            "pixel_y": "6.4",
+            "width": "3520",
+            "height": "2344"
+        },
+        {
+            "name": "Canon 40D",
+            "pixel_x": "5.7",
+            "pixel_y": "5.7",
+            "width": "3888",
+            "height": "2592"
+        },
+        {
+            "name": "Canon 400D",
+            "pixel_x": "5.7",
+            "pixel_y": "5.7",
+            "width": "3888",
+            "height": "2592"
+        },
+        {
+            "name": "Canon 5D",
+            "pixel_x": "8.2",
+            "pixel_y": "8.2",
+            "width": "4368",
+            "height": "2912"
+        },
+        {
+            "name": "CB245 Cookbook 1x1 bin",
+            "pixel_x": "8.5",
+            "pixel_y": "19.7",
+            "width": "755",
+            "height": "242"
+        },
+        {
+            "name": "CB245 Cookbook 1x2 bin",
+            "pixel_x": "17.0",
+            "pixel_y": "19.7",
+            "width": "378",
+            "height": "242"
+        },
+        {
+            "name": "FLI IMG-1602E",
+            "pixel_x": "9.0",
+            "pixel_y": "9.0",
+            "width": "1552",
+            "height": "1032"
+        },
+        {
+            "name": "FLI IMG-1024S",
+            "pixel_x": "24.0",
+            "pixel_y": "24.0",
+            "width": "1024",
+            "height": "1024"
+        },
+        {
+            "name": "FLI IMG-1001E",
+            "pixel_x": "24.0",
+            "pixel_y": "24.0",
+            "width": "1024",
+            "height": "1024"
+        },
+        {
+            "name": "FLI IMG-1302E",
+            "pixel_x": "16.0",
+            "pixel_y": "16.0",
+            "width": "1280",
+            "height": "1024"
+        },
+        {
+            "name": "FLI IMG-401E",
+            "pixel_x": "9.0",
+            "pixel_y": "9.0",
+            "width": "768",
+            "height": "512"
+        },
+        {
+            "name": "FLI IMG-261E",
+            "pixel_x": "20.0",
+            "pixel_y": "20.0",
+            "width": "512",
+            "height": "512"
+        },
+        {
+            "name": "FLI IMG-1401E",
+            "pixel_x": "6.8",
+            "pixel_y": "6.8",
+            "width": "1340",
+            "height": "1037"
+        },
+        {
+            "name": "FLI IMG-3200E",
+            "pixel_x": "6.8",
+            "pixel_y": "6.8",
+            "width": "2184",
+            "height": "1472"
+        },
+        {
+            "name": "FLI IMG-4202",
+            "pixel_x": "9.0",
+            "pixel_y": "9.0",
+            "width": "2048",
+            "height": "2048"
+        },
+        {
+            "name": "FLI IMG-4240",
+            "pixel_x": "13.5",
+            "pixel_y": "13.5",
+            "width": "2048",
+            "height": "2048"
+        },
+        {
+            "name": "FLI IMG-4300E",
+            "pixel_x": "24.0",
+            "pixel_y": "24.0",
+            "width": "2084",
+            "height": "2084"
+        },
+        {
+            "name": "FLI IMG-6303E",
+            "pixel_x": "9.0",
+            "pixel_y": "9.0",
+            "width": "3088",
+            "height": "2056"
+        },
+        {
+            "name": "FLI IMG-16801E",
+            "pixel_x": "9.0",
+            "pixel_y": "9.0",
+            "width": "4096",
+            "height": "4096"
+        },
+        {
+            "name": "FLI MaxCam CM1",
+            "pixel_x": "24.0",
+            "pixel_y": "24.0",
+            "width": "512",
+            "height": "512"
+        },
+        {
+            "name": "FLI MaxCam CM2",
+            "pixel_x": "13.0",
+            "pixel_y": "13.0",
+            "width": "1024",
+            "height": "1024"
+        },
+        {
+            "name": "FLI MaxCam CM7",
+            "pixel_x": "9.0",
+            "pixel_y": "9.0",
+            "width": "768",
+            "height": "512"
+        },
+        {
+            "name": "FLI MaxCam CM8",
+            "pixel_x": "9.0",
+            "pixel_y": "9.0",
+            "width": "1536",
+            "height": "1024"
+        },
+        {
+            "name": "FLI MaxCam CM9",
+            "pixel_x": "20.0",
+            "pixel_y": "20.0",
+            "width": "512",
+            "height": "512"
+        },
+        {
+            "name": "FLI MaxCam CM10",
+            "pixel_x": "6.8",
+            "pixel_y": "6.8",
+            "width": "2184",
+            "height": "1472"
+        },
+        {
+            "name": "FLI Dream Machine 512",
+            "pixel_x": "24.0",
+            "pixel_y": "24.0",
+            "width": "512",
+            "height": "512"
+        },
+        {
+            "name": "FLI Dream Machine 1024",
+            "pixel_x": "24.0",
+            "pixel_y": "24.0",
+            "width": "1024",
+            "height": "1024"
+        },
+        {
+            "name": "Genesis/Audine w/KAF-401",
+            "pixel_x": "9.0",
+            "pixel_y": "9.0",
+            "width": "735",
+            "height": "510"
+        },
+        {
+            "name": "Genesis/Audine w/KAF-1602",
+            "pixel_x": "9.0",
+            "pixel_y": "9.0",
+            "width": "1530",
+            "height": "1020"
+        },
+        {
+            "name": "Genesis/Audine w/KAF-3200",
+            "pixel_x": "6.8",
+            "pixel_y": "6.8",
+            "width": "2184",
+            "height": "1472"
+        },
+        {
+            "name": "Meade 208",
+            "pixel_x": "10.0",
+            "pixel_y": "10.0",
+            "width": "336",
+            "height": "242"
+        },
+        {
+            "name": "Meade 416",
+            "pixel_x": "9.0",
+            "pixel_y": "9.0",
+            "width": "735",
+            "height": "510"
+        },
+        {
+            "name": "Meade 1616",
+            "pixel_x": "9.0",
+            "pixel_y": "9.0",
+            "width": "1530",
+            "height": "1020"
+        },
+        {
+            "name": "Meade DSI Pro",
+            "pixel_x": "9.6",
+            "pixel_y": "7.5",
+            "width": "512",
+            "height": "492"
+        },
+        {
+            "name": "Meade DSI",
+            "pixel_x": "9.6",
+            "pixel_y": "7.5",
+            "width": "508",
+            "height": "489"
+        },
+        {
+            "name": "Orion StarShoot Color",
+            "pixel_x": "6.5",
+            "pixel_y": "6.5",
+            "width": "752",
+            "height": "582"
+        },
+        {
+            "name": "Nikon D1",
+            "pixel_x": "11.85",
+            "pixel_y": "11.89",
+            "width": "2000",
+            "height": "1312"
+        },
+        {
+            "name": "Nikon D70",
+            "pixel_x": "7.0",
+            "pixel_y": "9.0",
+            "width": "3008",
+            "height": "2000"
+        },
+        {
+            "name": "Phillips webcam (ICX098AK)",
+            "pixel_x": "5.6",
+            "pixel_y": "5.6",
+            "width": "659",
+            "height": "494"
+        },
+        {
+            "name": "Pixis PhotonMax",
+            "pixel_x": "16.0",
+            "pixel_y": "16.0",
+            "width": "512",
+            "height": "512"
+        },
+        {
+            "name": "Starlight XPress MX-5",
+            "pixel_x": "9.8",
+            "pixel_y": "12.6",
+            "width": "500",
+            "height": "290"
+        },
+        {
+            "name": "Starlight XPress MX5-C",
+            "pixel_x": "9.8",
+            "pixel_y": "12.6",
+            "width": "500",
+            "height": "290"
+        },
+        {
+            "name": "Starlight XPress MX7-C",
+            "pixel_x": "8.6",
+            "pixel_y": "8.6",
+            "width": "752",
+            "height": "582"
+        },
+        {
+            "name": "Starlight XPress MX516",
+            "pixel_x": "9.8",
+            "pixel_y": "12.6",
+            "width": "500",
+            "height": "290"
+        },
+        {
+            "name": "Starlight XPress HX516",
+            "pixel_x": "7.4",
+            "pixel_y": "7.4",
+            "width": "660",
+            "height": "494"
+        },
+        {
+            "name": "Starlight XPress HX516 HiRes",
+            "pixel_x": "9.8",
+            "pixel_y": "6.3",
+            "width": "500",
+            "height": "580"
+        },
+        {
+            "name": "Starlight XPress MX916",
+            "pixel_x": "11.6",
+            "pixel_y": "11.2",
+            "width": "752",
+            "height": "580"
+        },
+        {
+            "name": "Starlight XPress HX916",
+            "pixel_x": "6.7",
+            "pixel_y": "6.7",
+            "width": "1300",
+            "height": "1030"
+        },
+        {
+            "name": "Starlight XPress SXL8",
+            "pixel_x": "15.0",
+            "pixel_y": "15.0",
+            "width": "512",
+            "height": "512"
+        },
+        {
+            "name": "Starlight XPress MX716",
+            "pixel_x": "8.6",
+            "pixel_y": "8.3",
+            "width": "752",
+            "height": "580"
+        },
+        {
+            "name": "Starlight XPress SXV-H9/H9C",
+            "pixel_x": "6.4",
+            "pixel_y": "6.4",
+            "width": "1392",
+            "height": "1040"
+        },
+        {
+            "name": "Starlight XPress SXV-M25C",
+            "pixel_x": "7.8",
+            "pixel_y": "7.8",
+            "width": "2312",
+            "height": "2024"
+        },
+        {
+            "name": "Starlight XPress SXV-M8C",
+            "pixel_x": "3.125",
+            "pixel_y": "3.125",
+            "width": "3040",
+            "height": "1720"
+        },
+        {
+            "name": "Starlight XPress SXV-M7",
+            "pixel_x": "8.2",
+            "pixel_y": "8.4",
+            "width": "752",
+            "height": "580"
+        },
+        {
+            "name": "Starlight XPress SXV-M5/M5C",
+            "pixel_x": "9.8",
+            "pixel_y": "6.3",
+            "width": "500",
+            "height": "290"
+        },
+        {
+            "name": "Starlight XPress SXV-H5",
+            "pixel_x": "7.4",
+            "pixel_y": "7.4",
+            "width": "659",
+            "height": "494"
+        },
+        {
+            "name": "Starlight XPress SXV-M9",
+            "pixel_x": "11.2",
+            "pixel_y": "11.4",
+            "width": "752",
+            "height": "580"
+        },
+        {
+            "name": "SAC 4-II",
+            "pixel_x": "5.2",
+            "pixel_y": "5.2",
+            "width": "1280",
+            "height": "1024"
+        },
+        {
+            "name": "SAC 7",
+            "pixel_x": "5.6",
+            "pixel_y": "5.6",
+            "width": "640",
+            "height": "480"
+        },
+        {
+            "name": "SAC 8.5",
+            "pixel_x": "9.6",
+            "pixel_y": "7.5",
+            "width": "640",
+            "height": "480"
+        },
+        {
+            "name": "SAC 9",
+            "pixel_x": "8.6",
+            "pixel_y": "8.3",
+            "width": "752",
+            "height": "582"
+        },
+        {
+            "name": "SAC 10",
+            "pixel_x": "3.45",
+            "pixel_y": "3.45",
+            "width": "2140",
+            "height": "1560"
+        },
+        {
+            "name": "SBIG Rsrch 1001E",
+            "pixel_x": "24.0",
+            "pixel_y": "24.0",
+            "width": "1024",
+            "height": "1024"
+        },
+        {
+            "name": "SBIG Rsrch 1302E/LE",
+            "pixel_x": "16.0",
+            "pixel_y": "16.0",
+            "width": "1280",
+            "height": "1024"
+        },
+        {
+            "name": "SBIG Rsrch 11000M/CM",
+            "pixel_x": "9.0",
+            "pixel_y": "9.0",
+            "width": "4008",
+            "height": "2672"
+        },
+        {
+            "name": "SBIG Rsrch 4020M/CM",
+            "pixel_x": "7.4",
+            "pixel_y": "7.4",
+            "width": "2048",
+            "height": "2048"
+        },
+        {
+            "name": "SBIG Rsrch 6303E/LE",
+            "pixel_x": "9.0",
+            "pixel_y": "9.0",
+            "width": "3072",
+            "height": "2048"
+        },
+        {
+            "name": "SBIG ST-237",
+            "pixel_x": "7.4",
+            "pixel_y": "7.4",
+            "width": "640",
+            "height": "480"
+        },
+        {
+            "name": "SBIG ST-237A",
+            "pixel_x": "7.4",
+            "pixel_y": "7.4",
+            "width": "657",
+            "height": "495"
+        },
+        {
+            "name": "SBIG ST-7E/XE/XME/402",
+            "pixel_x": "9.0",
+            "pixel_y": "9.0",
+            "width": "765",
+            "height": "510"
+        },
+        {
+            "name": "SBIG ST-8E/XE",
+            "pixel_x": "9.0",
+            "pixel_y": "9.0",
+            "width": "1530",
+            "height": "1020"
+        },
+        {
+            "name": "SBIG ST-9E/XE",
+            "pixel_x": "20.0",
+            "pixel_y": "20.0",
+            "width": "512",
+            "height": "512"
+        },
+        {
+            "name": "SBIG ST-10E/ME/XE/MXE",
+            "pixel_x": "6.8",
+            "pixel_y": "6.8",
+            "width": "2184",
+            "height": "1472"
+        },
+        {
+            "name": "SBIG ST-1001E",
+            "pixel_x": "24.0",
+            "pixel_y": "24.0",
+            "width": "1024",
+            "height": "1024"
+        },
+        {
+            "name": "SBIG ST-2000XM/XCM",
+            "pixel_x": "7.4",
+            "pixel_y": "7.4",
+            "width": "1600",
+            "height": "1200"
+        },
+        {
+            "name": "SBIG ST-4",
+            "pixel_x": "13.75",
+            "pixel_y": "16.0",
+            "width": "192",
+            "height": "164"
+        },
+        {
+            "name": "SBIG ST-5C",
+            "pixel_x": "10.0",
+            "pixel_y": "10.0",
+            "width": "320",
+            "height": "240"
+        },
+        {
+            "name": "SBIG ST-6B",
+            "pixel_x": "23.0",
+            "pixel_y": "27.0",
+            "width": "375",
+            "height": "241"
+        },
+        {
+            "name": "SBIG STV Normal",
+            "pixel_x": "14.8",
+            "pixel_y": "14.8",
+            "width": "320",
+            "height": "200"
+        },
+        {
+            "name": "SBIG STV Wide",
+            "pixel_x": "22.2",
+            "pixel_y": "22.2",
+            "width": "218",
+            "height": "160"
+        },
+        {
+            "name": "SBIG STV Zoom",
+            "pixel_x": "7.4",
+            "pixel_y": "7.4",
+            "width": "320",
+            "height": "200"
+        },
+        {
+            "name": "SBIG ST-8300M/C",
+            "pixel_x": "5.4",
+            "pixel_y": "5.4",
+            "width": "3326",
+            "height": "2504"
+        },
+        {
+            "name": "Hubble - WFC3",
+            "pixel_x": "15.0",
+            "pixel_y": "15.0",
+            "width": "4096",
+            "height": "4096"
         },
         {
             "name": "Atik 314L Plus",
@@ -31,13 +913,23 @@
     ],
     "telescopes": [
         {
-            "name": "Sky-Watcher - Equinox 80 Pro",
-            "focal": "500",
-            "aperture": "80"
-        },
-        {
             "name": "10-inch SCT f/10",
             "focal": "2500",
+            "aperture": "250"
+        },
+        {
+            "name": "10-inch SCT f/6.3",
+            "focal": "1575",
+            "aperture": "250"
+        },
+        {
+            "name": "10-inch SCT f/5",
+            "focal": "1250",
+            "aperture": "250"
+        },
+        {
+            "name": "10-inch SCT f/3.3",
+            "focal": "825",
             "aperture": "250"
         },
         {
@@ -46,9 +938,1124 @@
             "aperture": "280"
         },
         {
+            "name": "11-inch SCT f/6.3",
+            "focal": "1764",
+            "aperture": "280"
+        },
+        {
+            "name": "11-inch SCT f/5",
+            "focal": "1400",
+            "aperture": "280"
+        },
+        {
+            "name": "11-inch SCT f/3.3",
+            "focal": "924",
+            "aperture": "280"
+        },
+        {
             "name": "12-inch SCT f/10",
             "focal": "3000",
             "aperture": "300"
+        },
+        {
+            "name": "12-inch SCT f/6.3",
+            "focal": "1890",
+            "aperture": "300"
+        },
+        {
+            "name": "12-inch SCT f/5",
+            "focal": "1500",
+            "aperture": "300"
+        },
+        {
+            "name": "12-inch SCT f/3.3",
+            "focal": "990",
+            "aperture": "300"
+        },
+        {
+            "name": "14-inch SCT f/11.5",
+            "focal": "4025",
+            "aperture": "350"
+        },
+        {
+            "name": "14-inch SCT f/11",
+            "focal": "350",
+            "aperture": "32"
+        },
+        {
+            "name": "14-inch SCT f/10",
+            "focal": "3500",
+            "aperture": "350"
+        },
+        {
+            "name": "14-inch SCT f/5.5",
+            "focal": "1925",
+            "aperture": "350"
+        },
+        {
+            "name": "14-inch SCT f/5",
+            "focal": "1750",
+            "aperture": "350"
+        },
+        {
+            "name": "14-inch SCT f/6.9",
+            "focal": "2415",
+            "aperture": "350"
+        },
+        {
+            "name": "14-inch SCT f/6.3",
+            "focal": "2205",
+            "aperture": "350"
+        },
+        {
+            "name": "16-inch SCT f/10",
+            "focal": "4000",
+            "aperture": "400"
+        },
+        {
+            "name": "16-inch SCT f/6.3",
+            "focal": "2520",
+            "aperture": "400"
+        },
+        {
+            "name": "16-inch SCT f/5",
+            "focal": "2000",
+            "aperture": "400"
+        },
+        {
+            "name": "AP Traveler EDFS 120 f/6",
+            "focal": "630",
+            "aperture": "105"
+        },
+        {
+            "name": "AP Star 12ED 120 f/8.5",
+            "focal": "1020",
+            "aperture": "120"
+        },
+        {
+            "name": "AP StarFire EDFS 130 f/6",
+            "focal": "780",
+            "aperture": "130"
+        },
+        {
+            "name": "AP StarFire EDFS 130 f/8",
+            "focal": "1040",
+            "aperture": "130"
+        },
+        {
+            "name": "AP StarFire EDT 152 f/9",
+            "focal": "1368",
+            "aperture": "152"
+        },
+        {
+            "name": "AP StarFire 152 f/12",
+            "focal": "1860",
+            "aperture": "155"
+        },
+        {
+            "name": "AP StarFire EDFS 155 f/7",
+            "focal": "1085",
+            "aperture": "155"
+        },
+        {
+            "name": "AP StarFire EDT 180 f/9",
+            "focal": "1620",
+            "aperture": "180"
+        },
+        {
+            "name": "AP StarFire EDF 180 f/7",
+            "focal": "1260",
+            "aperture": "180"
+        },
+        {
+            "name": "AP StarFire EDT 206 f/7.7",
+            "focal": "1586",
+            "aperture": "206"
+        },
+        {
+            "name": "Borg 45mm ED f/6.6",
+            "focal": "297",
+            "aperture": "45"
+        },
+        {
+            "name": "Borg 50mm f/10 ED",
+            "focal": "500",
+            "aperture": "50"
+        },
+        {
+            "name": "Borg 76mm f/6.6",
+            "focal": "501",
+            "aperture": "76"
+        },
+        {
+            "name": "Borg 76mm f/6.6 ED",
+            "focal": "501",
+            "aperture": "76"
+        },
+        {
+            "name": "Borg 100mm f/6.4",
+            "focal": "640",
+            "aperture": "100"
+        },
+        {
+            "name": "Borg 100mm f/6.4 ED",
+            "focal": "640",
+            "aperture": "100"
+        },
+        {
+            "name": "Borg 100mm f/4",
+            "focal": "400",
+            "aperture": "100"
+        },
+        {
+            "name": "Borg 100mm f/4 ED",
+            "focal": "400",
+            "aperture": "100"
+        },
+        {
+            "name": "Borg 125mm f/6.4 ED",
+            "focal": "800",
+            "aperture": "125"
+        },
+        {
+            "name": "Borg 125mm f/4 ED",
+            "focal": "500",
+            "aperture": "125"
+        },
+        {
+            "name": "Borg 125mm f/2.8 ED",
+            "focal": "350",
+            "aperture": "125"
+        },
+        {
+            "name": "Borg 150mm f/6.7 ED",
+            "focal": "1005",
+            "aperture": "150"
+        },
+        {
+            "name": "Borg 150mm f/4.2 ED",
+            "focal": "630",
+            "aperture": "150"
+        },
+        {
+            "name": "Celestron C102",
+            "focal": "1020",
+            "aperture": "102"
+        },
+        {
+            "name": "Celestron CR-150",
+            "focal": "1200",
+            "aperture": "150"
+        },
+        {
+            "name": "Comet Catcher",
+            "focal": "489",
+            "aperture": "140"
+        },
+        {
+            "name": "Fastar 8-inch",
+            "focal": "390",
+            "aperture": "203"
+        },
+        {
+            "name": "Fastar 11-inch",
+            "focal": "588",
+            "aperture": "279"
+        },
+        {
+            "name": "Fastar 14-inch",
+            "focal": "735",
+            "aperture": "356"
+        },
+        {
+            "name": "Nexstar 11 GPS",
+            "focal": "2800",
+            "aperture": "11"
+        },
+        {
+            "name": "Nexstar 8 GPS",
+            "focal": "2000",
+            "aperture": "203"
+        },
+        {
+            "name": "Coronado Helios 1",
+            "focal": "399",
+            "aperture": "40"
+        },
+        {
+            "name": "DGM OA-5.1 ATS",
+            "focal": "1404",
+            "aperture": "130"
+        },
+        {
+            "name": "DGM OA-6.5 ATS",
+            "focal": "1716",
+            "aperture": "165"
+        },
+        {
+            "name": "DGM OA-5.5",
+            "focal": "1405",
+            "aperture": "140"
+        },
+        {
+            "name": "DGM OA-7.0",
+            "focal": "1708",
+            "aperture": "178"
+        },
+        {
+            "name": "DGM OA-9.0",
+            "focal": "2188",
+            "aperture": "229"
+        },
+        {
+            "name": "Excelsior Optics f/6 10-inch Newt",
+            "focal": "1536",
+            "aperture": "256"
+        },
+        {
+            "name": "Excelsior Optics f/8 10-inch Newt",
+            "focal": "2064",
+            "aperture": "258"
+        },
+        {
+            "name": "Hubble Space Telescope",
+            "focal": "57600",
+            "aperture": "2400"
+        },
+        {
+            "name": "INTES MK67",
+            "focal": "1824",
+            "aperture": "67"
+        },
+        {
+            "name": "INTES MK72",
+            "focal": "1750",
+            "aperture": "72"
+        },
+        {
+            "name": "INTES MK66",
+            "focal": "1824",
+            "aperture": "66"
+        },
+        {
+            "name": "INTES MK69",
+            "focal": "912",
+            "aperture": "69"
+        },
+        {
+            "name": "INTES MK91",
+            "focal": "3150",
+            "aperture": "91"
+        },
+        {
+            "name": "INTES Micro Alter M603",
+            "focal": "1510",
+            "aperture": "603"
+        },
+        {
+            "name": "INTES Micro Alter M703",
+            "focal": "1780",
+            "aperture": "703"
+        },
+        {
+            "name": "INTES Micro Alter M809",
+            "focal": "2040",
+            "aperture": "809"
+        },
+        {
+            "name": "INTES Micro Alter M1608 f/10",
+            "focal": "4060",
+            "aperture": "406"
+        },
+        {
+            "name": "INTES Micro Alter M1608 f/20",
+            "focal": "8120",
+            "aperture": "406"
+        },
+        {
+            "name": "INTES MICRO MN56",
+            "focal": "750",
+            "aperture": "56"
+        },
+        {
+            "name": "INTES MICRO MN66",
+            "focal": "912",
+            "aperture": "66"
+        },
+        {
+            "name": "INTES MICRO MN76",
+            "focal": "1068",
+            "aperture": "76"
+        },
+        {
+            "name": "INTES MICRO MN86",
+            "focal": "1224",
+            "aperture": "86"
+        },
+        {
+            "name": "INTES MN61",
+            "focal": "912",
+            "aperture": "61"
+        },
+        {
+            "name": "INTES MN71",
+            "focal": "1068",
+            "aperture": "71"
+        },
+        {
+            "name": "JMI NGT-6",
+            "focal": "750",
+            "aperture": "152"
+        },
+        {
+            "name": "JMI NGT-12.5",
+            "focal": "1404",
+            "aperture": "318"
+        },
+        {
+            "name": "JMI NGT-18",
+            "focal": "2025",
+            "aperture": "457"
+        },
+        {
+            "name": "Meade 7-inch Mak-Cass",
+            "focal": "2670",
+            "aperture": "178"
+        },
+        {
+            "name": "Meade ETX-90",
+            "focal": "1242",
+            "aperture": "90"
+        },
+        {
+            "name": "Meade ETX-125",
+            "focal": "1905",
+            "aperture": "125"
+        },
+        {
+            "name": "Meade 127ED",
+            "focal": "1143",
+            "aperture": "127"
+        },
+        {
+            "name": "Meade 152ED",
+            "focal": "1368",
+            "aperture": "152"
+        },
+        {
+            "name": "Meade 178ED",
+            "focal": "1602",
+            "aperture": "178"
+        },
+        {
+            "name": "Meade 102APO",
+            "focal": "918",
+            "aperture": "102"
+        },
+        {
+            "name": "Megrez 102mm f/6.8",
+            "focal": "693",
+            "aperture": "102"
+        },
+        {
+            "name": "Megrez 80mm f/6",
+            "focal": "480",
+            "aperture": "80"
+        },
+        {
+            "name": "Obsession 15-in.",
+            "focal": "1710",
+            "aperture": "381"
+        },
+        {
+            "name": "OGS f/9 10-inch RC",
+            "focal": "2286",
+            "aperture": "254"
+        },
+        {
+            "name": "OGS f/9 12.5-inch RC",
+            "focal": "2835",
+            "aperture": "315"
+        },
+        {
+            "name": "OGS f/7.9 14.5-inch RC",
+            "focal": "2883",
+            "aperture": "365"
+        },
+        {
+            "name": "OGS f/8.4 16-inch RC",
+            "focal": "3360",
+            "aperture": "400"
+        },
+        {
+            "name": "OGS f/8.1 20-inch RC",
+            "focal": "4050",
+            "aperture": "500"
+        },
+        {
+            "name": "OGS f/8 24-inch RC",
+            "focal": "4800",
+            "aperture": "600"
+        },
+        {
+            "name": "OGS f/7.6 32-inch RC",
+            "focal": "6080",
+            "aperture": "800"
+        },
+        {
+            "name": "OGS Cassegrain 10-in. f/15",
+            "focal": "3810",
+            "aperture": "254"
+        },
+        {
+            "name": "OGS Cassegrain 12.5-in. f/16",
+            "focal": "5040",
+            "aperture": "315"
+        },
+        {
+            "name": "OGS Cassegrain 14.5-in. f/16",
+            "focal": "5840",
+            "aperture": "365"
+        },
+        {
+            "name": "OGS Cassegrain 16-in. f/14.25",
+            "focal": "5700",
+            "aperture": "400"
+        },
+        {
+            "name": "OGS Cassegrain 20-in. f/16",
+            "focal": "8000",
+            "aperture": "500"
+        },
+        {
+            "name": "OGS Cassegrain 24-in. f/16",
+            "focal": "9600",
+            "aperture": "600"
+        },
+        {
+            "name": "OGS Cassegrain 32-in. f/10",
+            "focal": "8000",
+            "aperture": "800"
+        },
+        {
+            "name": "Orion ShortTube 80mm",
+            "focal": "400",
+            "aperture": "80"
+        },
+        {
+            "name": "Orion 80ED",
+            "focal": "600",
+            "aperture": "80"
+        },
+        {
+            "name": "Orion 100ED",
+            "focal": "900",
+            "aperture": "100"
+        },
+        {
+            "name": "Orion Apex 127",
+            "focal": "1562",
+            "aperture": "127"
+        },
+        {
+            "name": "Orion Argonaut 6-in. Mak-Newt",
+            "focal": "900",
+            "aperture": "152"
+        },
+        {
+            "name": "Orion Argonaut 6-in. Mak-Cass",
+            "focal": "1800",
+            "aperture": "152"
+        },
+        {
+            "name": "Orion SkyView Pro 120mm",
+            "focal": "996",
+            "aperture": "120"
+        },
+        {
+            "name": "Pentax 75 SDHF f/6.7",
+            "focal": "502",
+            "aperture": "75"
+        },
+        {
+            "name": "Pentax 105 SD f/9.5",
+            "focal": "997",
+            "aperture": "105"
+        },
+        {
+            "name": "Pentax 105 SDHF f/6.7",
+            "focal": "703",
+            "aperture": "105"
+        },
+        {
+            "name": "Pentax 105 SDHF f/5",
+            "focal": "525",
+            "aperture": "105"
+        },
+        {
+            "name": "Pentax 100 SDUF f/4",
+            "focal": "400",
+            "aperture": "100"
+        },
+        {
+            "name": "Pentax 125 SDP f/6.4",
+            "focal": "800",
+            "aperture": "125"
+        },
+        {
+            "name": "Questar 3.5",
+            "focal": "1246",
+            "aperture": "89"
+        },
+        {
+            "name": "Questar 7",
+            "focal": "1849",
+            "aperture": "178"
+        },
+        {
+            "name": "RC Optics 10-RC",
+            "focal": "2250",
+            "aperture": "254"
+        },
+        {
+            "name": "RC Optics 12.5-RC",
+            "focal": "2808",
+            "aperture": "318"
+        },
+        {
+            "name": "RC Optics 16-RC",
+            "focal": "3360",
+            "aperture": "406"
+        },
+        {
+            "name": "RC Optics 20-RC",
+            "focal": "4050",
+            "aperture": "508"
+        },
+        {
+            "name": "RC Optics 20-RC f/6.4",
+            "focal": "3251",
+            "aperture": "508"
+        },
+        {
+            "name": "RC Optics 24-RC",
+            "focal": "4800",
+            "aperture": "610"
+        },
+        {
+            "name": "StarMaster 11-in.",
+            "focal": "1344",
+            "aperture": "279"
+        },
+        {
+            "name": "StarMaster 12.5-in.",
+            "focal": "1585",
+            "aperture": "318"
+        },
+        {
+            "name": "Takahashi FC-50",
+            "focal": "400",
+            "aperture": "50"
+        },
+        {
+            "name": "Takahashi FC-60",
+            "focal": "499",
+            "aperture": "60"
+        },
+        {
+            "name": "Takahashi FC-76",
+            "focal": "600",
+            "aperture": "76"
+        },
+        {
+            "name": "Takahashi FC-100",
+            "focal": "100",
+            "aperture": "100"
+        },
+        {
+            "name": "Takahashi FC-100N",
+            "focal": "800",
+            "aperture": "100"
+        },
+        {
+            "name": "Takahashi FC-125",
+            "focal": "1000",
+            "aperture": "125"
+        },
+        {
+            "name": "Takahashi FC-150",
+            "focal": "1695",
+            "aperture": "150"
+        },
+        {
+            "name": "Takahashi FS-60C",
+            "focal": "354",
+            "aperture": "60"
+        },
+        {
+            "name": "Takahashi FS-78",
+            "focal": "631",
+            "aperture": "78"
+        },
+        {
+            "name": "Takahashi FCL-Sky90",
+            "focal": "504",
+            "aperture": "90"
+        },
+        {
+            "name": "Takahashi FCL-Sky90 f/4.5",
+            "focal": "405",
+            "aperture": "90"
+        },
+        {
+            "name": "Takahashi FSQ-106",
+            "focal": "530",
+            "aperture": "106"
+        },
+        {
+            "name": "Takahashi FS-102",
+            "focal": "816",
+            "aperture": "102"
+        },
+        {
+            "name": "Takahashi FS-128",
+            "focal": "1036",
+            "aperture": "128"
+        },
+        {
+            "name": "Takahashi FS-130",
+            "focal": "1001",
+            "aperture": "130"
+        },
+        {
+            "name": "Takahashi FS-130 f/5.76",
+            "focal": "749",
+            "aperture": "130"
+        },
+        {
+            "name": "Takahashi FS-152",
+            "focal": "1216",
+            "aperture": "152"
+        },
+        {
+            "name": "Takahashi FCT-76",
+            "focal": "486",
+            "aperture": "76"
+        },
+        {
+            "name": "Takahashi FCT-100",
+            "focal": "640",
+            "aperture": "100"
+        },
+        {
+            "name": "Takahashi FCT-125",
+            "focal": "700",
+            "aperture": "125"
+        },
+        {
+            "name": "Takahashi FCT-150 f/5",
+            "focal": "750",
+            "aperture": "150"
+        },
+        {
+            "name": "Takahashi FCT-150",
+            "focal": "1050",
+            "aperture": "150"
+        },
+        {
+            "name": "Takahashi FCT-150 Ext Q",
+            "focal": "1680",
+            "aperture": "150"
+        },
+        {
+            "name": "Takahashi FCT-200",
+            "focal": "2000",
+            "aperture": "200"
+        },
+        {
+            "name": "Takahashi BRC-250",
+            "focal": "1275",
+            "aperture": "250"
+        },
+        {
+            "name": "Takahashi CN-212 Cass",
+            "focal": "2628",
+            "aperture": "212"
+        },
+        {
+            "name": "Takahashi CN-212 Newt",
+            "focal": "826",
+            "aperture": "212"
+        },
+        {
+            "name": "Takahashi Epsilon 130",
+            "focal": "429",
+            "aperture": "130"
+        },
+        {
+            "name": "Takahashi Epsilon 160",
+            "focal": "528",
+            "aperture": "160"
+        },
+        {
+            "name": "Takahashi Epsilon 180",
+            "focal": "504",
+            "aperture": "180"
+        },
+        {
+            "name": "Takahashi Epsilon 200",
+            "focal": "800",
+            "aperture": "200"
+        },
+        {
+            "name": "Takahashi Epsilon 210",
+            "focal": "630",
+            "aperture": "210"
+        },
+        {
+            "name": "Takahashi Epsilon 250",
+            "focal": "850",
+            "aperture": "250"
+        },
+        {
+            "name": "Takahashi Epsilon 300",
+            "focal": "1140",
+            "aperture": "300"
+        },
+        {
+            "name": "Takahashi Epsilon 300N",
+            "focal": "1050",
+            "aperture": "300"
+        },
+        {
+            "name": "Takahashi Epsilon 350",
+            "focal": "1260",
+            "aperture": "350"
+        },
+        {
+            "name": "Takahashi Mewlon 180",
+            "focal": "2160",
+            "aperture": "180"
+        },
+        {
+            "name": "Takahashi Mewlon 210",
+            "focal": "2415",
+            "aperture": "210"
+        },
+        {
+            "name": "Takahashi Mewlon 250",
+            "focal": "3000",
+            "aperture": "250"
+        },
+        {
+            "name": "Takahashi Mewlon 300",
+            "focal": "3570",
+            "aperture": "300"
+        },
+        {
+            "name": "Takahashi MT130",
+            "focal": "780",
+            "aperture": "130"
+        },
+        {
+            "name": "Takahashi MT160",
+            "focal": "976",
+            "aperture": "160"
+        },
+        {
+            "name": "Takahashi MT200",
+            "focal": "1200",
+            "aperture": "200"
+        },
+        {
+            "name": "Takahashi RC-300",
+            "focal": "2340",
+            "aperture": "300"
+        },
+        {
+            "name": "Takahashi TOA-130 f/7.7",
+            "focal": "1001",
+            "aperture": "130"
+        },
+        {
+            "name": "Takahashi TOA-150 f/7.3",
+            "focal": "1095",
+            "aperture": "150"
+        },
+        {
+            "name": "Takahashi TSC-225 (SCT)",
+            "focal": "2700",
+            "aperture": "225"
+        },
+        {
+            "name": "TAL 200 Klevzov Cassegrain",
+            "focal": "1740",
+            "aperture": "200"
+        },
+        {
+            "name": "Stellarvue AT1010N 78mm",
+            "focal": "479",
+            "aperture": "78"
+        },
+        {
+            "name": "Stellarvue SV102D",
+            "focal": "703",
+            "aperture": "102"
+        },
+        {
+            "name": "TEC MC200/11",
+            "focal": "2200",
+            "aperture": "200"
+        },
+        {
+            "name": "TEC MC200/15.5",
+            "focal": "3100",
+            "aperture": "200"
+        },
+        {
+            "name": "TEC MC200/20",
+            "focal": "4000",
+            "aperture": "200"
+        },
+        {
+            "name": "TEC MC250/12",
+            "focal": "3000",
+            "aperture": "250"
+        },
+        {
+            "name": "TEC MC250/20",
+            "focal": "5000",
+            "aperture": "250"
+        },
+        {
+            "name": "TEC-6",
+            "focal": "1824",
+            "aperture": "152"
+        },
+        {
+            "name": "TEC MN 7",
+            "focal": "1068",
+            "aperture": "178"
+        },
+        {
+            "name": "TEC MN200/3.5",
+            "focal": "707",
+            "aperture": "200"
+        },
+        {
+            "name": "TEC 140 f/7",
+            "focal": "980",
+            "aperture": "140"
+        },
+        {
+            "name": "TeleVue 60 APO",
+            "focal": "360",
+            "aperture": "60"
+        },
+        {
+            "name": "TeleVue Pronto/Ranger",
+            "focal": "476",
+            "aperture": "70"
+        },
+        {
+            "name": "TeleVue 76",
+            "focal": "478",
+            "aperture": "76"
+        },
+        {
+            "name": "TeleVue 101",
+            "focal": "545",
+            "aperture": "101"
+        },
+        {
+            "name": "TeleVue 85",
+            "focal": "595",
+            "aperture": "85"
+        },
+        {
+            "name": "TeleVue 102",
+            "focal": "877",
+            "aperture": "102"
+        },
+        {
+            "name": "TeleVue NP101",
+            "focal": "545",
+            "aperture": "101"
+        },
+        {
+            "name": "TeleVue NP127",
+            "focal": "660",
+            "aperture": "127"
+        },
+        {
+            "name": "TMB-80 f/6",
+            "focal": "480",
+            "aperture": "80"
+        },
+        {
+            "name": "TMB-80 f/7",
+            "focal": "560",
+            "aperture": "80"
+        },
+        {
+            "name": "TMB-100",
+            "focal": "800",
+            "aperture": "100"
+        },
+        {
+            "name": "TMB-105",
+            "focal": "651",
+            "aperture": "105"
+        },
+        {
+            "name": "TMB-130",
+            "focal": "780",
+            "aperture": "130"
+        },
+        {
+            "name": "TMB-152",
+            "focal": "1200",
+            "aperture": "152"
+        },
+        {
+            "name": "TMB-175",
+            "focal": "1400",
+            "aperture": "175"
+        },
+        {
+            "name": "TMB-180",
+            "focal": "1620",
+            "aperture": "180"
+        },
+        {
+            "name": "TMB-203",
+            "focal": "1827",
+            "aperture": "203"
+        },
+        {
+            "name": "TMB-254",
+            "focal": "2286",
+            "aperture": "254"
+        },
+        {
+            "name": "TMB 160mm Mak-Newt",
+            "focal": "880",
+            "aperture": "160"
+        },
+        {
+            "name": "Vixen FL80S",
+            "focal": "640",
+            "aperture": "80"
+        },
+        {
+            "name": "Vixen 80M",
+            "focal": "912",
+            "aperture": "80"
+        },
+        {
+            "name": "Vixen ED 80S",
+            "focal": "720",
+            "aperture": "80"
+        },
+        {
+            "name": "Vixen FL102S",
+            "focal": "918",
+            "aperture": "102"
+        },
+        {
+            "name": "Vixen ED80S",
+            "focal": "720",
+            "aperture": "80"
+        },
+        {
+            "name": "Vixen 102M",
+            "focal": "999",
+            "aperture": "102"
+        },
+        {
+            "name": "Vixen ED102S",
+            "focal": "918",
+            "aperture": "102"
+        },
+        {
+            "name": "Vixen DED 108SS",
+            "focal": "540",
+            "aperture": "108"
+        },
+        {
+            "name": "Vixen VX102ED",
+            "focal": "663",
+            "aperture": "102"
+        },
+        {
+            "name": "Vixen ED114SS",
+            "focal": "604",
+            "aperture": "114"
+        },
+        {
+            "name": "Vixen ED130S",
+            "focal": "858",
+            "aperture": "130"
+        },
+        {
+            "name": "Vixen NA120S",
+            "focal": "804",
+            "aperture": "120"
+        },
+        {
+            "name": "Vixen R130S",
+            "focal": "715",
+            "aperture": "130"
+        },
+        {
+            "name": "Vixen NA130SS",
+            "focal": "806",
+            "aperture": "130"
+        },
+        {
+            "name": "Vixen NA140SS",
+            "focal": "798",
+            "aperture": "140"
+        },
+        {
+            "name": "Vixen R150S",
+            "focal": "750",
+            "aperture": "150"
+        },
+        {
+            "name": "Vixen R200SS",
+            "focal": "800",
+            "aperture": "200"
+        },
+        {
+            "name": "Vixen VC200L",
+            "focal": "1800",
+            "aperture": "200"
+        },
+        {
+            "name": "Vixen VMC200L",
+            "focal": "1950",
+            "aperture": "200"
+        },
+        {
+            "name": "Astro-Tech AT90EDT",
+            "focal": "603",
+            "aperture": "90"
+        },
+        {
+            "name": "Astro-Tech AT12RCT",
+            "focal": "2432",
+            "aperture": "305"
+        },
+        {
+            "name": "Tenosky 70ED",
+            "focal": "420",
+            "aperture": "70"
+        },
+        {
+            "name": "Sky-Watcher - Equinox 80 Pro",
+            "focal": "500",
+            "aperture": "80"
         }
     ]
 }

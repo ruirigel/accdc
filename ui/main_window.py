@@ -451,6 +451,11 @@ class MainWindow(QMainWindow):
             self.verificar_rede_tempo_real()
             self.atualizar_tabela_network()
 
+        # Modificação: Retirar o foco automático de inputs ao mudar de aba
+        widget_atual = self.tabs.currentWidget()
+        if widget_atual:
+            widget_atual.setFocus()
+
     def ao_clicar_network_status(self, _event):
         self.lbl_network_status.setText("Network checking...")
         self.verificar_rede_tempo_real()
@@ -1171,7 +1176,6 @@ class MainWindow(QMainWindow):
         main_layout = QVBoxLayout(tab)
         grid_catalogs = QGridLayout()
 
-        # Mapeamento dinâmico baseado nos ficheiros .dat da pasta data/
         mapeamento_ficheiros = [
             ("BARNARD", "Barnard"),
             ("BSL", "Bright Stars"),
@@ -1215,6 +1219,16 @@ class MainWindow(QMainWindow):
 
         main_layout.addLayout(grid_catalogs)
         main_layout.addStretch()
+
+        note_group = QGroupBox()
+        note_layout = QVBoxLayout(note_group)
+        note_label = QLabel(
+            "Note:\nAstronomical catalog is a list of celestial bodies, usually including their main characteristics. "
+            "When selecting an object from these catalogs, query is executed by exact coordinates loaded from local .dat files."
+        )
+        note_label.setStyleSheet("color: #aaaaaa; font-style: italic;")
+        note_layout.addWidget(note_label)
+        main_layout.addWidget(note_group)
 
         self.tabs.addTab(tab, "Catalogs")
 
@@ -1268,6 +1282,16 @@ class MainWindow(QMainWindow):
             self.table_historic.setItem(row_idx, 7, QTableWidgetItem(item.get("pixel_x", "")))
             self.table_historic.setItem(row_idx, 8, QTableWidgetItem(item.get("pixel_y", "")))
 
+        note_group = QGroupBox()
+        note_layout = QVBoxLayout(note_group)
+        note_label = QLabel(
+            "Note:\nHere you will see all your searches done in the past. You have the ability to double-click to review "
+            "the target with all parameters again and get basic info about the target."
+        )
+        note_label.setStyleSheet("color: #aaaaaa; font-style: italic;")
+        note_layout.addWidget(note_label)
+        main_layout.addWidget(note_group)
+
         self.tabs.addTab(tab, "Historic")
 
     def init_network_tab(self):
@@ -1289,6 +1313,17 @@ class MainWindow(QMainWindow):
 
         main_layout.addWidget(self.table_network)
         self.atualizar_tabela_network()
+
+        note_group = QGroupBox()
+        note_layout = QVBoxLayout(note_group)
+        note_label = QLabel(
+            "Note:\nHere you will see all your searches in the network coming from you and all users in real time. "
+            "You have the ability to double-click to review the target with all parameters again, and can get hardware items of a user "
+            "to add to your database. Take advantage of research shared by other users."
+        )
+        note_label.setStyleSheet("color: #aaaaaa; font-style: italic;")
+        note_layout.addWidget(note_label)
+        main_layout.addWidget(note_group)
 
         self.tabs.addTab(tab, "Network")
 
@@ -1493,6 +1528,13 @@ class MainWindow(QMainWindow):
         self.btn_up_tel.clicked.connect(lambda: self.move_row(self.table_tel, -1))
         self.btn_down_tel.clicked.connect(lambda: self.move_row(self.table_tel, 1))
 
+        note_group = QGroupBox()
+        note_layout = QVBoxLayout(note_group)
+        note_label = QLabel("Note:\nHere you can manage your astronomical setup. Click '➕' to add a row, double-click to edit, and click '💾' to save changes permanently.")
+        note_label.setStyleSheet("color: #aaaaaa; font-style: italic;")
+        note_layout.addWidget(note_label)
+        main_layout.addWidget(note_group)
+
         self.tabs.addTab(tab, "Instruments")
 
     @staticmethod
@@ -1659,6 +1701,16 @@ class MainWindow(QMainWindow):
         main_layout.addWidget(btn_save_settings)
         main_layout.addStretch()
 
+        note_group = QGroupBox()
+        note_layout = QVBoxLayout(note_group)
+        note_label = QLabel(
+            "Note:\nConfigure your ASCOM telescope connection parameters here to enable direct 'Slew' to target coordinates, "
+            "as well as your username and country info for global sharing in the Network tab."
+        )
+        note_label.setStyleSheet("color: #aaaaaa; font-style: italic;")
+        note_layout.addWidget(note_label)
+        main_layout.addWidget(note_group)
+
         self.tabs.addTab(tab, "Settings")
 
     def init_about_tab(self):
@@ -1723,6 +1775,15 @@ class MainWindow(QMainWindow):
 
         main_layout.addWidget(about_group)
         main_layout.addStretch()
+
+        note_group = QGroupBox()
+        note_layout = QVBoxLayout(note_group)
+        note_label = QLabel(
+            "Note:\nDesigned for high-precision field calculations and astronomical observation coordination."
+        )
+        note_label.setStyleSheet("color: #aaaaaa; font-style: italic;")
+        note_layout.addWidget(note_label)
+        main_layout.addWidget(note_group)
 
         self.tabs.addTab(tab, "About")
 
