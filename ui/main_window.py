@@ -27,6 +27,8 @@ from core.firebase_sync import (
     enviar_registo_network, carregar_registos_network,
     verificar_status_servico, verificar_status_survey
 )
+from core.ascom import testar_conexao_ascom, enviar_slew_ascom
+from core.indi import testar_conexao_indi, enviar_slew_indi
 from core.version import VERSION
 
 APP_VERSION = VERSION
@@ -277,15 +279,29 @@ class FOVRenderWorker(QThread):
 
 
 class NetworkStatusWorker(QThread):
-    status_checked = Signal(bool, str, bool, str)
+    status_checked = Signal(bool, str, bool, str, bool, str, bool, str)
 
     def run(self):
         try:
+            settings = carregar_settings()
             fb_ok, fb_msg = verificar_status_servico(timeout=4)
             survey_ok, survey_msg = verificar_status_survey(timeout=4)
-            self.status_checked.emit(fb_ok, fb_msg, survey_ok, survey_msg)
+
+            ascom_ok, ascom_msg = testar_conexao_ascom(
+                host=settings.get("ascom_host", "127.0.0.1"),
+                port=settings.get("ascom_port", "11111"),
+                timeout=3
+            ) if settings.get("ascom_enabled", False) else (False, "ASCOM Disabled")
+
+            indi_ok, indi_msg = testar_conexao_indi(
+                host=settings.get("indi_host", "127.0.0.1"),
+                port=settings.get("indi_port", "7624"),
+                timeout=3
+            ) if settings.get("indi_enabled", False) else (False, "INDI Disabled")
+
+            self.status_checked.emit(fb_ok, fb_msg, survey_ok, survey_msg, ascom_ok, ascom_msg, indi_ok, indi_msg)
         except Exception as e:
-            self.status_checked.emit(False, str(e), False, str(e))
+            self.status_checked.emit(False, str(e), False, str(e), False, str(e), False, str(e))
 
 
 class NetworkLoadWorker(QThread):
@@ -327,7 +343,6 @@ class MainWindow(QMainWindow):
         self.is_rendering = False
         self.render_pending = False
 
-        # Carregar catálogo .dat localmente
         self.catalogos_locais_dat = obter_todos_objetos_dat()
 
         status_bar = self.statusBar()
@@ -411,6 +426,22 @@ class MainWindow(QMainWindow):
         self.tabs.currentChanged.connect(self.ao_mudar_aba)
         self.atualizar_combos_instrumentos()
 
+        # Carregar e selecionar automaticamente o último setup utilizado
+        last_tel = settings.get("last_telescope", "")
+        last_ccd = settings.get("last_ccd", "")
+
+        if last_tel:
+            for i in range(self.combo_panel_telescope.count()):
+                if self.combo_panel_telescope.itemText(i) == last_tel:
+                    self.combo_panel_telescope.setCurrentIndex(i)
+                    break
+
+        if last_ccd:
+            for i in range(self.combo_panel_ccd.count()):
+                if self.combo_panel_ccd.itemText(i) == last_ccd:
+                    self.combo_panel_ccd.setCurrentIndex(i)
+                    break
+
         self.net_worker = None
         self.net_timer = QTimer(self)
         self.net_timer.setInterval(10000)
@@ -451,7 +482,6 @@ class MainWindow(QMainWindow):
             self.verificar_rede_tempo_real()
             self.atualizar_tabela_network()
 
-        # Modificação: Retirar o foco automático de inputs ao mudar de aba
         widget_atual = self.tabs.currentWidget()
         if widget_atual:
             widget_atual.setFocus()
@@ -467,18 +497,18 @@ class MainWindow(QMainWindow):
         self.net_worker.status_checked.connect(self.ao_atualizar_status_network)
         self.net_worker.start()
 
-    def ao_atualizar_status_network(self, fb_ok, fb_msg, survey_ok, survey_msg):
+    def ao_atualizar_status_network(self, fb_ok, fb_msg, survey_ok, survey_msg, ascom_ok, ascom_msg, indi_ok, indi_msg):
         fb_str = "on" if fb_ok else "off"
         survey_str = "on" if survey_ok else "off"
+        ascom_str = "on" if ascom_ok else "off"
+        indi_str = "on" if indi_ok else "off"
 
-        settings = carregar_settings()
-        ascom_enabled = settings.get("ascom_enabled", False)
-        ascom_str = "on" if ascom_enabled else "off"
-
-        text = f"Network {fb_str} | {survey_str} | {ascom_str}"
+        text = f"Network {fb_str} | survey {survey_str} | ascom {ascom_str} | indi {indi_str}"
         self.lbl_network_status.setText(text)
         self.lbl_network_status.setStyleSheet("color: #cccccc; font-size: 11px;")
-        self.lbl_network_status.setToolTip(f"Status - Firebase: {fb_msg} | Survey: {survey_msg} | ASCOM: {'Enabled' if ascom_enabled else 'Disabled'} (Click to refresh)")
+        self.lbl_network_status.setToolTip(
+            f"Status:\n• Firebase: {fb_msg}\n• Survey: {survey_msg}\n• ASCOM: {ascom_msg}\n• INDI: {indi_msg}\n(Click to refresh)"
+        )
 
     def closeEvent(self, event):
         if hasattr(self, 'net_timer') and self.net_timer.isActive():
@@ -553,18 +583,15 @@ class MainWindow(QMainWindow):
         target_grid.addWidget(QLabel("Target (e.g., M51):"), 0, 0)
         self.input_target = QLineEdit("M51")
 
-        # Validador e conversão automática para MAIÚSCULAS na textbox
         validator = QRegularExpressionValidator(QRegularExpression(r"[A-Za-z0-9\+\-\.\:\s°′″hms]*"))
         self.input_target.setValidator(validator)
         self.input_target.textChanged.connect(lambda text: self.input_target.setText(text.upper()))
 
-        # QCompleter dinâmico enriquecido com dados lidos dos ficheiros .dat
         lista_sugestoes = []
         for cat_key, itens in self.catalogos_locais_dat.items():
             for item in itens:
                 lista_sugestoes.append(item["name"])
 
-        # Fallback de itens standard caso não haja .dat carregados
         lista_sugestoes.extend([f"M{i}" for i in range(1, 111)])
         lista_sugestoes.extend([f"NGC{i}" for i in range(1, 1000)])
         lista_sugestoes.extend([f"IC{i}" for i in range(1, 1000)])
@@ -613,10 +640,10 @@ class MainWindow(QMainWindow):
         self.btn_preview.setStyleSheet("font-weight: bold; padding: 8px; background-color: #2b5b84; color: white;")
         self.btn_preview.clicked.connect(self.perform_calculations)
 
-        self.btn_slew = QPushButton("🔭 Slew (ASCOM)")
-        self.btn_slew.setToolTip("Send current coordinates to telescope via ASCOM")
+        self.btn_slew = QPushButton("🔭 Slew (Telescope)")
+        self.btn_slew.setToolTip("Send target coordinates to active ASCOM or INDI mount")
         self.btn_slew.setStyleSheet("font-weight: bold; padding: 8px; background-color: #4a2b84; color: white;")
-        self.btn_slew.clicked.connect(self.executar_slew_ascom)
+        self.btn_slew.clicked.connect(self.executar_slew_telescopio)
 
         action_layout.addWidget(self.btn_preview, 2)
         action_layout.addWidget(self.btn_slew, 1)
@@ -777,6 +804,12 @@ class MainWindow(QMainWindow):
 
     def perform_calculations(self):
         try:
+            # Guardar o setup selecionado para sessões futuras
+            settings = carregar_settings()
+            settings["last_telescope"] = self.combo_panel_telescope.currentText()
+            settings["last_ccd"] = self.combo_panel_ccd.currentText()
+            guardar_settings(settings)
+
             focal = float(self.input_focal.text())
             aperture = float(self.input_aperture.text())
             pixel = float(self.input_pixel.text())
@@ -838,22 +871,38 @@ class MainWindow(QMainWindow):
             self.table_network.setItem(row_idx, 7, QTableWidgetItem(item.get("ccd", "")))
             self.table_network.setItem(row_idx, 8, QTableWidgetItem(str(item.get("pixel_size", ""))))
 
-    def executar_slew_ascom(self):
+    def executar_slew_telescopio(self):
         settings = carregar_settings()
-        if not settings.get("ascom_enabled", False):
-            QMessageBox.warning(self, "ASCOM Disabled", "ASCOM connection is disabled in Settings.")
+        ascom_on = settings.get("ascom_enabled", False)
+        indi_on = settings.get("indi_enabled", False)
+
+        if not ascom_on and not indi_on:
+            QMessageBox.warning(self, "Hardware Control Disabled", "Neither ASCOM nor INDI connection is enabled in Settings.")
             return
 
         coords = self.lbl_coords.text()
-        host = settings.get("ascom_host", "127.0.0.1")
-        port = settings.get("ascom_port", "11111")
-
         if "--" in coords or "Querying" in coords:
             QMessageBox.information(self, "Notice", "Please calculate a valid target first.")
             return
 
-        print(f"[ASCOM SLEW] Sending coordinates {coords} to telescope at {host}:{port}...")
-        QMessageBox.information(self, "ASCOM Slew", f"Slew command sent successfully!\nTarget: {coords}\nServer: {host}:{port}")
+        parts = coords.split("|")
+        ra_val = parts[0].strip() if len(parts) > 0 else ""
+        dec_val = parts[1].strip() if len(parts) > 1 else ""
+
+        mensagens = []
+        if ascom_on:
+            host = settings.get("ascom_host", "127.0.0.1")
+            port = settings.get("ascom_port", "11111")
+            ok, msg = enviar_slew_ascom(host, port, ra_val, dec_val)
+            mensagens.append(f"ASCOM: {msg}")
+
+        if indi_on:
+            host = settings.get("indi_host", "127.0.0.1")
+            port = settings.get("indi_port", "7624")
+            ok, msg = enviar_slew_indi(host, port, ra_val, dec_val)
+            mensagens.append(f"INDI: {msg}")
+
+        QMessageBox.information(self, "Telescope Slew Result", "\n\n".join(mensagens))
 
     def on_download_progress(self, percent, message=""):
         if percent == -1:
@@ -1679,7 +1728,8 @@ class MainWindow(QMainWindow):
         user_layout.addWidget(self.chk_share_network, 2, 0, 1, 2)
         main_layout.addWidget(user_group)
 
-        ascom_group = QGroupBox("Telescope Connection & Control (ASCOM)")
+        # Grupo ASCOM Alpaca
+        ascom_group = QGroupBox("Telescope Connection & Control (ASCOM Alpaca)")
         ascom_layout = QGridLayout(ascom_group)
 
         self.chk_ascom_enabled = QCheckBox("Enable ASCOM / Alpaca Connection")
@@ -1695,6 +1745,23 @@ class MainWindow(QMainWindow):
         ascom_layout.addWidget(self.input_ascom_port, 2, 1)
         main_layout.addWidget(ascom_group)
 
+        # Grupo INDI Server
+        indi_group = QGroupBox("Telescope Connection & Control (INDI Protocol)")
+        indi_layout = QGridLayout(indi_group)
+
+        self.chk_indi_enabled = QCheckBox("Enable INDI Server Connection")
+        self.chk_indi_enabled.setChecked(settings.get("indi_enabled", False))
+        indi_layout.addWidget(self.chk_indi_enabled, 0, 0, 1, 2)
+
+        indi_layout.addWidget(QLabel("IP Address / Host:"), 1, 0)
+        self.input_indi_host = QLineEdit(settings.get("indi_host", "127.0.0.1"))
+        indi_layout.addWidget(self.input_indi_host, 1, 1)
+
+        indi_layout.addWidget(QLabel("Port:"), 2, 0)
+        self.input_indi_port = QLineEdit(settings.get("indi_port", "7624"))
+        indi_layout.addWidget(self.input_indi_port, 2, 1)
+        main_layout.addWidget(indi_group)
+
         btn_save_settings = QPushButton("💾 Save Settings")
         btn_save_settings.setStyleSheet("font-weight: bold; padding: 8px; background-color: #2b5b84; color: white;")
         btn_save_settings.clicked.connect(self.salvar_configuracoes_settings)
@@ -1704,8 +1771,8 @@ class MainWindow(QMainWindow):
         note_group = QGroupBox()
         note_layout = QVBoxLayout(note_group)
         note_label = QLabel(
-            "Note:\nConfigure your ASCOM telescope connection parameters here to enable direct 'Slew' to target coordinates, "
-            "as well as your username and country info for global sharing in the Network tab."
+            "Note:\nConfigure your ASCOM Alpaca or INDI telescope server parameters here to enable direct 'Slew' commands, "
+            "as well as your username and country info for global network sharing."
         )
         note_label.setStyleSheet("color: #aaaaaa; font-style: italic;")
         note_layout.addWidget(note_label)
@@ -1753,7 +1820,7 @@ class MainWindow(QMainWindow):
 
         lbl_descricao = QLabel(
             "<b>Accdc</b> is an advanced tool for optical calculation, Field of View (FOV) simulation, "
-            "astronomical instrument management, and hardware control via ASCOM, designed to support "
+            "astronomical instrument management, and hardware control via ASCOM / INDI protocols, designed to support "
             "amateur and professional astronomers in planning astrophotography sessions."
         )
         lbl_descricao.setWordWrap(True)
@@ -1764,7 +1831,7 @@ class MainWindow(QMainWindow):
             "• Python / PySide6 (Graphical Interface)<br>"
             "• Astropy & Pillow (Optical Processing & Coordinates)<br>"
             "• JSON (Local Data & History Persistence)<br>"
-            "• ASCOM / Alpaca Protocol (Telescope Integration)"
+            "• ASCOM / Alpaca & INDI Protocols (Telescope Hardware Integration)"
         )
         lbl_tech.setWordWrap(True)
         lbl_tech.setStyleSheet("color: #cccccc; margin-top: 15px;")
@@ -1788,13 +1855,19 @@ class MainWindow(QMainWindow):
         self.tabs.addTab(tab, "About")
 
     def salvar_configuracoes_settings(self):
+        settings = carregar_settings()
         novas_settings = {
             "user_name": self.input_username.text().strip(),
             "user_country": self.combo_country.currentData(),
             "share_network": self.chk_share_network.isChecked(),
             "ascom_host": self.input_ascom_host.text().strip(),
             "ascom_port": self.input_ascom_port.text().strip(),
-            "ascom_enabled": self.chk_ascom_enabled.isChecked()
+            "ascom_enabled": self.chk_ascom_enabled.isChecked(),
+            "indi_host": self.input_indi_host.text().strip(),
+            "indi_port": self.input_indi_port.text().strip(),
+            "indi_enabled": self.chk_indi_enabled.isChecked(),
+            "last_telescope": settings.get("last_telescope", ""),
+            "last_ccd": settings.get("last_ccd", "")
         }
         sucesso = guardar_settings(novas_settings)
         if sucesso:

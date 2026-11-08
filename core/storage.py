@@ -1,6 +1,8 @@
 import os
 import json
 import sys
+import getpass
+import locale
 from datetime import datetime
 
 def obter_caminho_base():
@@ -126,22 +128,48 @@ def guardar_historico(historico_lista):
         return False
 
 def carregar_settings():
-    """Carrega as definições do ficheiro settings.json ou devolve padrões."""
+    """Carrega as definições do ficheiro settings.json ou devolve padrões dinâmicos baseados no sistema."""
     caminho = obter_caminho_dados("settings.json")
-    if os.path.exists(caminho):
-        try:
-            with open(caminho, 'r', encoding='utf-8') as f:
-                return json.load(f)
-        except Exception as e:
-            print(f"[ERROR LOADING SETTINGS] {e}")
-    return {
-        "user_name": "rui",
-        "user_country": "pt",
+
+    # Deteção dinâmica do nome de utilizador do sistema operativo
+    try:
+        default_user = getpass.getuser()
+    except Exception:
+        default_user = "astronomer"
+
+    # Deteção dinâmica do país do sistema operativo (ex: 'pt_PT' -> 'pt')
+    try:
+        loc = locale.getdefaultlocale()[0]
+        default_country = loc.split('_')[-1].lower() if loc and '_' in loc else "pt"
+    except Exception:
+        default_country = "pt"
+
+    defaults = {
+        "user_name": default_user,
+        "user_country": default_country,
         "share_network": True,
         "ascom_host": "127.0.0.1",
         "ascom_port": "11111",
-        "ascom_enabled": False
+        "ascom_enabled": False,
+        "indi_host": "127.0.0.1",
+        "indi_port": "7624",
+        "indi_enabled": False,
+        "last_telescope": "",
+        "last_ccd": ""
     }
+
+    if os.path.exists(caminho):
+        try:
+            with open(caminho, 'r', encoding='utf-8') as f:
+                dados = json.load(f)
+                # Assegura que todas as chaves obrigatórias existem sem apagar valores guardados
+                for chave, valor_padrao in defaults.items():
+                    dados.setdefault(chave, valor_padrao)
+                return dados
+        except Exception as e:
+            print(f"[ERROR LOADING SETTINGS] {e} - Could not parse settings.json, falling back to defaults.")
+
+    return defaults
 
 def guardar_settings(settings_dict):
     """Guarda as definições no disco."""
