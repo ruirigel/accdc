@@ -19,9 +19,63 @@
 
 ## 🔭 Overview
 
-**Accdc** (*Astronomy CCD Calculator*) is an open-source desktop application built with Python and PySide6 (Qt6) designed for amateur astronomers and astrophotographers. It helps you accurately simulate, plan, and visualize how deep-sky objects (nebulae, galaxies, star clusters) fit into your telescope and camera sensor frame.
+📜 The Journey Behind Accdc
+Accdc (Astronomy CCD Calculator) has been an evolving project built out of passion for astronomy and technical precision.
 
-Beyond optical formulas, Accdc queries astronomical databases (SIMBAD / NED via Astroquery) and automatically fetches real sky survey imagery (STScI Digitized Sky Survey - DSS). It projects an interactive sensor field-of-view (FOV) rectangle over the sky background, complete with real-time rotation, pan/drag offsets, optical flips, and smooth zooming.
+I started building this app in 2009 and over the years, the application has gone through multiple iterations across different environments and languages. It initially gained widespread adoption across the astronomy community in its Java-based releases (notably v4.8) distributed as a portable, cross-platform tool on major software portals like SourceForge and Softpedia. Even back then, it pioneered integrating optical calculations with real sky survey downloads directly from the NASA SkyView (DSS) engine.
+
+🚀 A Renewed Vision: The Modern Python & Qt6 Era
+After a period of evolution and refining requirements, Accdc has been completely rebuilt from the ground up to push accuracy, speed, and user experience even further.
+
+Accdc is an open-source desktop application built with Python 3 and PySide6 (Qt6) designed for amateur astronomers and astrophotographers. It helps you accurately simulate, plan, and visualize how deep-sky objects (nebulae, galaxies, star clusters) fit into your telescope and camera sensor frame.
+
+Beyond optical formulas, Accdc queries astronomical databases (SIMBAD / NED via Astroquery) and local high-precision catalog databases (.dat), automatically fetching real sky survey imagery (STScI Digitized Sky Survey - DSS). It projects an interactive sensor field-of-view (FOV) rectangle over the sky background, complete with real-time rotation, pan/drag offsets, optical flips, smooth zooming, hardware management, and ASCOM telescope control.
+
+This new architecture represents a full commitment to delivering a modern, robust, and extensible tool built for the modern astrophotographer.
+
+## 📸 Interface & App Features
+
+<details open>
+  <summary><b>🎛️ 1. Panel (Main Workspace & FOV Visualizer)</b></summary>
+  <br>
+  <p>Main control area for setting optical parameters (focal length, aperture, CCD pixel size), querying target coordinates, rendering real-time DSS background imagery, dynamic sensor FOV overlays, image rotations, and ASCOM slew execution.</p>
+  <img src="assets/panel.png" alt="Panel Tab" width="100%">
+</details>
+
+<details>
+  <summary><b>📚 2. Catalogs (Local Astronomical Datasets)</b></summary>
+  <br>
+  <p>Quick selector for deep-sky targets from local astronomical catalog files (Messier, NGC, IC, Barnard, Caldwell, SAO, Lynds, etc.) with exact coordinate resolution.</p>
+  <img src="assets/catalog.png" alt="Catalogs Tab" width="100%">
+</details>
+
+<details>
+  <summary><b>📜 3. Historic (Search Log & Query Recall)</b></summary>
+  <br>
+  <p>Log of all previous target queries. Double-clicking any historical record automatically reloads all optical and target parameters directly into the main Panel.</p>
+  <img src="assets/historic.png" alt="Historic Tab" width="100%">
+</details>
+
+<details>
+  <summary><b>🌐 4. Network (Real-Time Community Sharing)</b></summary>
+  <br>
+  <p>Live feed connected to Firebase Realtime Database showing target queries shared by other astrophotographers globally. Includes right-click features to export community hardware setups into your own local database.</p>
+  <img src="assets/network.png" alt="Network Tab" width="100%">
+</details>
+
+<details>
+  <summary><b>🔭 5. Instruments (Equipment Profiles Management)</b></summary>
+  <br>
+  <p>Custom inventory manager to add, edit, reorder, and persist your telescopes (aperture, focal length) and CCD/CMOS cameras (pixel sizes, matrix resolution).</p>
+  <img src="assets/instruments.png" alt="Instruments Tab" width="100%">
+</details>
+
+<details>
+  <summary><b>⚙️ 6. Settings (User Profile & ASCOM Alpaca Configuration)</b></summary>
+  <br>
+  <p>Configuration panel for network participation, username, country selection, and ASCOM / Alpaca telescope server connection details (IP address and port).</p>
+  <img src="assets/settings.png" alt="Settings Tab" width="100%">
+</details>
 
 ---
 
