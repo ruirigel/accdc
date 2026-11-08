@@ -14,6 +14,9 @@
   <img src="https://img.shields.io/badge/Astro-Astropy%20%7C%20Astroquery-FF5A36?style=flat" alt="Astropy" />
   <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License" />
 </p>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/ruirigel/accdc/refs/heads/main/image.png" alt="accdc" />
+</p>
 
 ---
 
