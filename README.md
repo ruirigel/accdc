@@ -22,9 +22,19 @@
 
 ## 🔭 Overview
 
-**Accdc** (*Astronomy CCD Calculator*) is an open-source desktop application built with Python and PySide6 (Qt6) designed for amateur astronomers and astrophotographers. It helps you accurately simulate, plan, and visualize how deep-sky objects (nebulae, galaxies, star clusters) fit into your telescope and camera sensor frame.
+📜 The Journey Behind Accdc
+Accdc (Astronomy CCD Calculator) has been an evolving project built out of passion for astronomy and technical precision.
 
-Beyond optical formulas, Accdc queries astronomical databases (SIMBAD / NED via Astroquery) and automatically fetches real sky survey imagery (STScI Digitized Sky Survey - DSS). It projects an interactive sensor field-of-view (FOV) rectangle over the sky background, complete with real-time rotation, pan/drag offsets, optical flips, and smooth zooming.
+Over the years, the application has gone through multiple iterations across different environments and languages. It initially gained widespread adoption across the astronomy community in its Java-based releases (notably v4.8)—distributed as a portable, cross-platform tool on major software portals like SourceForge and Softpedia. Even back then, it pioneered integrating optical calculations with real sky survey downloads directly from the NASA SkyView (DSS) engine.
+
+🚀 A Renewed Vision: The Modern Python & Qt6 Era
+After a period of evolution and refining requirements, Accdc has been completely rebuilt from the ground up to push accuracy, speed, and user experience even further.
+
+Accdc is an open-source desktop application built with Python 3 and PySide6 (Qt6) designed for amateur astronomers and astrophotographers. It helps you accurately simulate, plan, and visualize how deep-sky objects (nebulae, galaxies, star clusters) fit into your telescope and camera sensor frame.
+
+Beyond optical formulas, Accdc queries astronomical databases (SIMBAD / NED via Astroquery) and local high-precision catalog databases (.dat), automatically fetching real sky survey imagery (STScI Digitized Sky Survey - DSS). It projects an interactive sensor field-of-view (FOV) rectangle over the sky background, complete with real-time rotation, pan/drag offsets, optical flips, smooth zooming, hardware management, and ASCOM telescope control.
+
+This new architecture represents a full commitment to delivering a modern, robust, and extensible tool built for the modern astrophotographer.
 
 ---
 
