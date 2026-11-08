@@ -25,7 +25,7 @@
 📜 The Journey Behind Accdc
 Accdc (Astronomy CCD Calculator) has been an evolving project built out of passion for astronomy and technical precision.
 
-Over the years, the application has gone through multiple iterations across different environments and languages. It initially gained widespread adoption across the astronomy community in its Java-based releases (notably v4.8)—distributed as a portable, cross-platform tool on major software portals like SourceForge and Softpedia. Even back then, it pioneered integrating optical calculations with real sky survey downloads directly from the NASA SkyView (DSS) engine.
+I started building this app in 2009 and over the years, the application has gone through multiple iterations across different environments and languages. It initially gained widespread adoption across the astronomy community in its Java-based releases (notably v4.8) distributed as a portable, cross-platform tool on major software portals like SourceForge and Softpedia. Even back then, it pioneered integrating optical calculations with real sky survey downloads directly from the NASA SkyView (DSS) engine.
 
 🚀 A Renewed Vision: The Modern Python & Qt6 Era
 After a period of evolution and refining requirements, Accdc has been completely rebuilt from the ground up to push accuracy, speed, and user experience even further.
