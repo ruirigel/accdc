@@ -909,6 +909,13 @@
             "pixel_y": "6.45",
             "width": "1392",
             "height": "1040"
+        },
+        {
+            "name": "SVBONY SV605CC",
+            "pixel_x": "3.7",
+            "pixel_y": "3.7",
+            "width": "3008",
+            "height": "3008"
         }
     ],
     "telescopes": [
@@ -2056,6 +2063,16 @@
             "name": "Sky-Watcher - Equinox 80 Pro",
             "focal": "500",
             "aperture": "80"
+        },
+        {
+            "name": "SVBONY SV550 80mm",
+            "focal": "480",
+            "aperture": "80"
+        },
+        {
+            "name": "William Optics AP 61/360 ZenithStar ZS61 II",
+            "focal": "360",
+            "aperture": "61"
         }
     ]
 }

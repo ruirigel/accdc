@@ -127,17 +127,37 @@ def guardar_historico(historico_lista):
         print(f"[ERROR SAVING HISTORY] {e}")
         return False
 
+def carregar_favoritos():
+    """Carrega os favoritos do Night Planner do disco."""
+    caminho = obter_caminho_dados("favorites.json")
+    if os.path.exists(caminho):
+        try:
+            with open(caminho, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except Exception as e:
+            print(f"[ERROR LOADING FAVORITES] {e}")
+    return []
+
+def guardar_favoritos(favoritos_lista):
+    """Guarda os favoritos do Night Planner no disco."""
+    caminho = obter_caminho_dados("favorites.json")
+    try:
+        with open(caminho, 'w', encoding='utf-8') as f:
+            json.dump(favoritos_lista, f, indent=4, ensure_ascii=False)
+        return True
+    except Exception as e:
+        print(f"[ERROR SAVING FAVORITES] {e}")
+        return False
+
 def carregar_settings():
     """Carrega as definições do ficheiro settings.json ou devolve padrões dinâmicos baseados no sistema."""
     caminho = obter_caminho_dados("settings.json")
 
-    # Deteção dinâmica do nome de utilizador do sistema operativo
     try:
         default_user = getpass.getuser()
     except Exception:
         default_user = "astronomer"
 
-    # Deteção dinâmica do país do sistema operativo (ex: 'pt_PT' -> 'pt')
     try:
         loc = locale.getdefaultlocale()[0]
         default_country = loc.split('_')[-1].lower() if loc and '_' in loc else "pt"
@@ -147,6 +167,9 @@ def carregar_settings():
     defaults = {
         "user_name": default_user,
         "user_country": default_country,
+        "user_lat": 38.64,
+        "user_lon": -9.10,
+        "min_altitude": 20.0,
         "share_network": True,
         "ascom_host": "127.0.0.1",
         "ascom_port": "11111",
@@ -162,7 +185,6 @@ def carregar_settings():
         try:
             with open(caminho, 'r', encoding='utf-8') as f:
                 dados = json.load(f)
-                # Assegura que todas as chaves obrigatórias existem sem apagar valores guardados
                 for chave, valor_padrao in defaults.items():
                     dados.setdefault(chave, valor_padrao)
                 return dados

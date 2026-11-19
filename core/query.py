@@ -27,13 +27,11 @@ def formatar_coordenadas_astropy(ra_raw, dec_raw):
     ra_str = ra_raw.strip()
     dec_str = dec_raw.strip()
     try:
-        # Tentar ler como horas e graus
         coord = SkyCoord(f"{ra_str} {dec_str}", unit=(u.hourangle, u.deg))
         ra_fmt = coord.ra.to_string(unit='hour', sep='h ', precision=1) + 's'
         dec_fmt = coord.dec.to_string(unit='deg', sep='d ', precision=1) + 'm'
         return ra_fmt, dec_fmt
     except Exception:
-        # Tentar ler como graus decimais/sexagesimais genéricos
         try:
             coord = SkyCoord(f"{ra_str} {dec_str}", unit=(u.deg, u.deg))
             ra_fmt = coord.ra.to_string(unit='hour', sep='h ', precision=1) + 's'
@@ -45,7 +43,7 @@ def formatar_coordenadas_astropy(ra_raw, dec_raw):
 def procurar_objeto_em_catalogos_dat(nome_alvo, pasta_dados=None):
     """
     Procura o objeto nos ficheiros .dat na pasta de dados.
-    Suporta formato Nome,RA,Dec (ex: B1,03:33.0,+31:10).
+    Suporta formato Nome,RA,Dec,Mag (ex: M63,13:15:49,+42:01:57,8.6).
     """
     if pasta_dados is None:
         pasta_dados = os.path.join(obter_caminho_base(), "data")
@@ -71,12 +69,22 @@ def procurar_objeto_em_catalogos_dat(nome_alvo, pasta_dados=None):
 
                             if obj_nome_sem_espaco == alvo_limpo or obj_nome == nome_alvo.strip().upper():
                                 ra_fmt, dec_fmt = formatar_coordenadas_astropy(partes[1], partes[2])
+
+                                # Extrair magnitude se existir na 4ª coluna
+                                mag_val = None
+                                if len(partes) >= 4 and partes[3]:
+                                    try:
+                                        mag_val = float(partes[3].replace(',', '.'))
+                                    except ValueError:
+                                        pass
+
                                 return {
                                     "name": partes[0],
                                     "ra": ra_fmt,
                                     "dec": dec_fmt,
                                     "raw_ra": partes[1],
                                     "raw_dec": partes[2],
+                                    "mag": mag_val,
                                     "catalogo": ficheiro,
                                     "status": f"Sucesso ({ficheiro})"
                                 }
@@ -87,8 +95,8 @@ def procurar_objeto_em_catalogos_dat(nome_alvo, pasta_dados=None):
 
 def obter_todos_objetos_dat(pasta_dados=None):
     """
-    Retorna um dicionário agregando todos os objetos encontrados nos ficheiros .dat da pasta data.
-    Organizado por nome do catálogo/ficheiro.
+    Retorna um dicionário agregando todos os objetos encontrados nos ficheiros .dat da pasta data,
+    incluindo a respetiva magnitude caso esteja presente.
     """
     if pasta_dados is None:
         pasta_dados = os.path.join(obter_caminho_base(), "data")
@@ -111,10 +119,19 @@ def obter_todos_objetos_dat(pasta_dados=None):
                             continue
                         partes = [p.strip() for p in linha.split(',')]
                         if len(partes) >= 3:
+                            # Extrair magnitude da 4ª coluna se existir
+                            mag_val = None
+                            if len(partes) >= 4 and partes[3]:
+                                try:
+                                    mag_val = float(partes[3].replace(',', '.'))
+                                except ValueError:
+                                    pass
+
                             itens.append({
                                 "name": partes[0],
                                 "ra": partes[1],
-                                "dec": partes[2]
+                                "dec": partes[2],
+                                "mag": mag_val
                             })
             except Exception as e:
                 print(f"[ERROR LOADING DAT] {ficheiro}: {e}")
@@ -132,7 +149,7 @@ def query_target_coordinates(nome_alvo):
     # 1. Tentar encontrar primeiro nos ficheiros .dat locais
     res_dat = procurar_objeto_em_catalogos_dat(alvo_original)
     if res_dat:
-        print(f"[COORDINATES] Target '{alvo_original}' found in catalog '{res_dat.get('catalogo')}': RA={res_dat.get('ra')}, Dec={res_dat.get('dec')}")
+        print(f"[COORDINATES] Target '{alvo_original}' found in catalog '{res_dat.get('catalogo')}': RA={res_dat.get('ra')}, Dec={res_dat.get('dec')}, Mag={res_dat.get('mag')}")
         return res_dat
 
     # 2. Deteção inteligente: se o utilizador colar coordenadas brutas na textbox
@@ -147,6 +164,7 @@ def query_target_coordinates(nome_alvo):
                 "name": alvo_original,
                 "ra": ra_str,
                 "dec": dec_str,
+                "mag": None,
                 "status": "Success (Manual Coordinates)"
             }
         except Exception:
@@ -163,6 +181,7 @@ def query_target_coordinates(nome_alvo):
             "name": alvo_original,
             "ra": ra_str,
             "dec": dec_str,
+            "mag": None,
             "status": "Success"
         }
     except Exception:
@@ -176,6 +195,7 @@ def query_target_coordinates(nome_alvo):
             "name": item["name"],
             "ra": item["ra"],
             "dec": item["dec"],
+            "mag": None,
             "status": "Success (Offline)"
         }
 
@@ -183,7 +203,6 @@ def query_target_coordinates(nome_alvo):
     return {"status": "Object not found."}
 
 def obter_caminho_cache(nome_alvo, fov_calculado=None):
-    """Retorna o caminho absoluto para a imagem em cache adaptado ao FOV dinâmico solicitado."""
     base_dir = obter_caminho_base()
     pasta_cache = os.path.join(base_dir, "data", "cache")
     if not os.path.exists(pasta_cache):
@@ -199,9 +218,6 @@ def obter_caminho_cache(nome_alvo, fov_calculado=None):
     return os.path.join(pasta_cache, f"{alvo_limpo}_{int(fov_efetivo)}m_skyview.jpg"), fov_efetivo
 
 def fetch_target_image(nome_alvo, fov_solicitado=None, progress_callback=None):
-    """
-    Descarrega o fundo do NASA SkyView (DSS) usando o nome do objeto ou as coordenadas brutas dos catálogos .dat.
-    """
     caminho_cache, fov_efetivo = obter_caminho_cache(nome_alvo, fov_solicitado)
 
     if os.path.exists(caminho_cache):
@@ -210,7 +226,6 @@ def fetch_target_image(nome_alvo, fov_solicitado=None, progress_callback=None):
             progress_callback(100)
         return caminho_cache, fov_efetivo
 
-    # Se for um objeto do catálogo .dat, enviamos as coordenadas exatas para o SkyView em vez do nome!
     res_dat = procurar_objeto_em_catalogos_dat(nome_alvo)
     if res_dat and "raw_ra" in res_dat and "raw_dec" in res_dat:
         posicao_query = f"{res_dat['raw_ra']} {res_dat['raw_dec']}"
@@ -280,4 +295,4 @@ def fetch_target_image(nome_alvo, fov_solicitado=None, progress_callback=None):
     except Exception as e:
         print(f"[WARNING] Exception connecting to NASA SkyView: {e}")
 
-    raise RuntimeError("Could not retrieve image from NASA SkyView.")
+    raise RuntimeError("Could not retrieve image from NASA SkyView.")
