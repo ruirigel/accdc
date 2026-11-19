@@ -74,6 +74,7 @@ This new architecture represents a full commitment to delivering a modern, robus
   <summary><b>🌙 6. Night Planner (Nightly Visibility Planner)</b></summary>
   <br>
   <p>Automated visibility planner that queries all local astronomical catalogues and returns every deep-sky object currently above your configurable minimum altitude. Each result shows real-time moon angular separation, meridian transit time, and transit altitude — allowing you to quickly identify the best targets for the current night from your exact location.</p>
+  <img src="assets/nightplanner.png" alt="Instruments Tab" width="100%">
 </details>
 
 <details>
