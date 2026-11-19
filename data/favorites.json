@@ -1,1 +1,14 @@
-[]
+[
+    {
+        "name": "NGC5569",
+        "catalog": "NGC",
+        "mag": "12.3",
+        "altitude": "73.9°",
+        "azimuth": "67.1°",
+        "quality": "Prime (Zenith)",
+        "moon_sep": "114.4°",
+        "transit_time": "13:44",
+        "ra": "17:02:41",
+        "dec": "+43:12:44"
+    }
+]
