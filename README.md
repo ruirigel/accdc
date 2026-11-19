@@ -71,9 +71,15 @@ This new architecture represents a full commitment to delivering a modern, robus
 </details>
 
 <details>
-  <summary><b>⚙️ 6. Settings (User Profile & ASCOM Alpaca Configuration)</b></summary>
+  <summary><b>🌙 6. Night Planner (Nightly Visibility Planner)</b></summary>
   <br>
-  <p>Configuration panel for network participation, username, country selection, and ASCOM / Alpaca telescope server connection details (IP address and port).</p>
+  <p>Automated visibility planner that queries all local astronomical catalogues and returns every deep-sky object currently above your configurable minimum altitude. Each result shows real-time moon angular separation, meridian transit time, and transit altitude — allowing you to quickly identify the best targets for the current night from your exact location.</p>
+</details>
+
+<details>
+  <summary><b>⚙️ 7. Settings (User Profile, Location & ASCOM Alpaca Configuration)</b></summary>
+  <br>
+  <p>Configuration panel for observatory latitude/longitude (used by the Night Planner), network participation, username, country selection, ASCOM / Alpaca and INDI telescope server connection details (IP address and port). ASCOM and INDI connections are mutually exclusive and enforce each other automatically.</p>
   <img src="assets/settings.png" alt="Settings Tab" width="100%">
 </details>
 
@@ -100,6 +106,16 @@ This new architecture represents a full commitment to delivering a modern, robus
 - **Target History & Network Sync:**
   - Local history log of recently queried celestial targets.
   - *Network* tab providing community sync of observations and target queries using Firebase Realtime Database.
+- **Night Planner:**
+  - Automatic scan of all local catalogues (Messier, NGC, IC, Barnard, Caldwell, etc.) against the observer's configured location.
+  - Filters objects above a configurable minimum altitude at the current time.
+  - Displays moon angular separation, meridian transit time, and transit altitude for every listed object.
+  - Refreshes automatically whenever the observer location is saved in Settings.
+- **Observatory Location:**
+  - Latitude and Longitude input fields in Settings, persisted to `data/settings.json`.
+  - Used by the Night Planner for precise Alt/Az visibility calculations via Astropy.
+- **ASCOM / INDI Mutual Exclusion:**
+  - Enabling ASCOM automatically disables INDI and vice versa, preventing conflicting telescope connections.
 
 ---
 
@@ -307,13 +323,17 @@ Whenever you push a tag (e.g. `v20261105`) or trigger the workflow manually from
 accdc/
 ├── assets/             # Application icons and branding assets
 ├── core/               # Business logic, optical formulas & network queries
+│   ├── ascom.py        # ASCOM / Alpaca connection and telescope control
 │   ├── calculator.py   # Optical math (scale, FOV, focal ratio)
 │   ├── firebase_sync.py# Firebase network logging and status verification
-│   ├── query.py        # Astronomical coordinates query and DSS image fetching
-│   ├── storage.py      # Persistence for instruments, settings and logs
+│   ├── observer.py     # Alt/Az visibility calculator (Astropy-based)
+│   ├── query.py        # Astronomical coordinates query, DSS image fetching & catalogue visibility scan
+│   ├── storage.py      # Persistence for instruments, settings, favourites and logs
 │   └── version.py      # Application version definition
 ├── data/
-│   └── instruments.json# Default instrument database (telescopes & sensors)
+│   ├── favorites.json  # User-saved favourite deep-sky objects
+│   ├── instruments.json# Default instrument database (telescopes & sensors)
+│   └── *.dat           # Local catalogue files (Messier, NGC, IC, BSL, Caldwell, etc.)
 ├── ui/
 │   └── main_window.py  # PySide6 GUI interface implementation
 ├── .gitignore          # Git exclusion rules
